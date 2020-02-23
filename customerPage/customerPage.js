@@ -3,19 +3,26 @@
 var currentRenderedObjects = [];
 
 $(function() {
-  console.log("first called");
+  /**
+   * When a menu-"header" (i.e. beer) is slicked
+   */
   $(".beverages-list li").on("click", function(e) {
     e.preventDefault();
     var beveragesToRender = [];
-    $(".menuItem").remove();
+    $(".menuItem").remove(); // Removes all items from the menu since we want to render new
     if (e.target.id === "liquor") {
-      beveragesToRender = findStrongBeveregesToShow(30);
+      // Currently all beverages with alc % > 30 are placed under liquor
+      beveragesToRender = findStrongBeveregesToShow(30); // If liquor was clicked we find all strong bev first
     } else {
-      beveragesToRender = findBeveragesToShow(e.target.id, DB2.spirits);
+      beveragesToRender = findBeveragesToShow(e.target.id, DB2.spirits); // Otherwise we just find all sprits that match our id (I.e. beer or wine atm)
     }
 
-    var menuItems = $();
+    var menuItems = $(); // Jquery object that we'll fill with spirits below
 
+    /**
+     * This for loop creates a div for every bev that we're gonna render
+     * Adds it to the menuItem jquery object
+     */
     for (x = 0; x < beveragesToRender.length; x++) {
       var item = beveragesToRender[x].namn;
       var price =
@@ -42,16 +49,19 @@ $(function() {
 
     currentRenderedObjects = beveragesToRender;
 
-    $(".beverages-list ").append(menuItems);
+    $(".beverages-list ").append(menuItems); //Appends all the above created divs to our beverage list
 
+    /**
+     * Someone clicked order-button
+     */
     $(".order-button").on("click", function(e) {
       var orderItems = $();
       addItem(e.target.id); // Calls the order API
-      var orderList = getOrders();
-      for (i = 0; i < orderList.length; i++) {
+      var orderList = getOrders(); // Gets all the orders to render them. This should in the future be for just one user/table
+      for (i = 0; i < orderList.length; i++) { 
         for (j = 0; j < currentRenderedObjects.length; j++) {
-          if (orderList[i].id === currentRenderedObjects[j].artikelid) {
-            $(".order-item").remove();
+          if (orderList[i].id === currentRenderedObjects[j].artikelid) { // Finds the item in the orderList in the rendered beverages to get more info about it, i.e. name
+            $(".order-item").remove(); // Ugly but removes the previous orders before they're added again with some changes... To avoid duplicates 
             var name = "<t>" + currentRenderedObjects[j].namn + "</t>";
             var quantity = "<t>" + orderList[i].quantity + "</t>";
             orderItems = orderItems.add(
@@ -69,10 +79,16 @@ $(function() {
       $(".order-list-div").append(orderItems);
     });
 
+    /**
+     * This should probably be moved to a "menu-API"... Well it works now.
+     * 
+     */
+
     $(".more-info-button").on("click", function(e) {
       var moreInfo = $();
       for (i = 0; i < beveragesToRender.length; i++) {
-        if (beveragesToRender[i].artikelid === e.target.value) {
+        if (beveragesToRender[i].artikelid === e.target.value) { // e.target.value is the id of the product that more info was requested about
+          // Finds its object to get more info
           console.log(beveragesToRender[i]);
           var origin =
             "<t>" + "Origin: " + beveragesToRender[i].ursprung + "</t>";
@@ -88,7 +104,7 @@ $(function() {
           );
         }
       }
-      $("#" + e.target.value + ".menuItem").append(moreInfo);
+      $("#" + e.target.value + ".menuItem").append(moreInfo);  //Appends the additional info the element that match it's ID and class
       $("#close-button").on("click", function() {
         $("#more-info-box").remove();
       });
@@ -98,9 +114,8 @@ $(function() {
 
 function findStrongBeveregesToShow(percentage) {
   var strongBeverages = [];
-  console.log("sp");
   for (i = 0; i < DB2.spirits.length; i++) {
-    if (parseFloat(DB2.spirits[i].alkoholhalt) >= percentage) {
+    if (parseFloat(DB2.spirits[i].alkoholhalt) >= percentage) { //Finds spirits from the DB2 with the desired alcohol %
       strongBeverages.push(DB2.spirits[i]);
     }
   }
@@ -108,11 +123,16 @@ function findStrongBeveregesToShow(percentage) {
   return findBeveragesToShow("liquor", strongBeverages);
 }
 
+/**
+ * PubDB is the temp (???) DB which stores what items the pub currently have in stock
+ * This functions finds those items in the DB2 Lars gave us to get more info about them :)))))
+ * @param {string} type Which type of bev to look for
+ * @param {array} listOfSpirits The array to search for
+ */
 function findBeveragesToShow(type, listOfSpirits) {
   var beveragesToShow = [];
   if (type === "liquor") {
-    console.log(listOfSpirits[0]);
-    for (i = 0; i < PubDB.spirits.length; i++) {
+    for (i = 0; i < PubDB.spirits.length; i++) { 
       for (j = 0; j < listOfSpirits.length; j++) {
         var spirit;
         if (PubDB.spirits[i].beverage_id === listOfSpirits[j].artikelid) {
@@ -126,7 +146,9 @@ function findBeveragesToShow(type, listOfSpirits) {
       for (j = 0; j < listOfSpirits.length; j++) {
         var spirit = listOfSpirits[j];
         if (PubDB.spirits[i].beverage_id === spirit.artikelid) {
-          if (spirit.varugrupp.includes(type)) {
+          // checks that "varugrupp" ("type of beverage") includes the ID of the clicked menu-tab
+          // I.e. if "beer" was clicked the ID is Ã–l, then we look for those that include "Ã–l" in their "varugrupp"
+          if (spirit.varugrupp.includes(type)) { 
             beveragesToShow.push(spirit);
           }
         }
@@ -178,4 +200,3 @@ function findBeveragesToShow(type, listOfSpirits) {
     });
     
     */
-
