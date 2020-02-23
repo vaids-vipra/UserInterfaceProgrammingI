@@ -1,0 +1,30 @@
+.menu-tabs ul {
+  padding-left: 0;
+}
+
+.menu-tabs ul li {
+  list-style-type: none;
+  display: inline-block;
+  background: #3e8db3;
+  padding: 6px 15px;
+  border-radius: 50%;
+  color: #383838;
+}
+
+.menu-tabs ul li :active {
+  background: #2a607a;
+}
+
+.menuItem t {
+  color: red;
+}
+
+#more-info-box {
+  display: flex;
+  flex-direction: column;
+}
+
+#close-button {
+  font: normal 1em/1 Arial, sans-serif;
+  content: "\2716";
+}
