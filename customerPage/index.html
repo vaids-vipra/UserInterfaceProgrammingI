@@ -15,9 +15,10 @@
     <link rel="stylesheet" href="css/styles.css?v=1.0" />
   </head>
   <body>
-    <div>
+    <h1>Header</h1>
+
+    <div class="customer-page-container">
       <!-- 			<button disabled id="tempButton">TEST FILL UP STORAGE</button> -->
-      <h1>Header</h1>
       <div class="menu-tabs">
         <h3 class="menu-header">Beverages</h3>
         <ul class="beverages-list">
@@ -25,20 +26,25 @@
           <li id="vin">Wine</li>
           <li id="liquor">Liquor</li>
         </ul>
-        <div class="order-cart-container">
-          <h3>Orders</h3>
-          <div class="order-list-div">
-            <ul class="order-list">
-              Order list
-            </ul>
-          </div>
-          <button>Place Order</button>
+      </div>
+      <div
+        class="order-cart-container"
+        ondragover="allowDrop(event)"
+        ondrop="menuItemDropped(event)"
+      >
+        <h3>Orders</h3>
+        <div class="order-list-div">
+          <ul class="order-list">
+            Order list
+          </ul>
         </div>
+        <button>Place Order</button>
       </div>
     </div>
   </body>
   <script></script>
   <script src="customerPage.js"></script>
+  <script src="menuAPI.js"></script>
   <script src="orderCart.js"></script>
   <script type="text/javascript" src="./../db/Beverages.js"></script>
   <script type="text/javascript" src="./../db/orderDB.js"></script>
