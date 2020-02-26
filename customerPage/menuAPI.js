@@ -121,15 +121,15 @@ function findBeveragesToShow(type, listOfSpirits) {
  * @param {string} id
  * @param {array} renderedItems
  */
-function renderMoreInfoAboutItem(id, renderedItems) {
+function renderMoreInfoAboutItem(id) {
   var moreInfo = $();
-  for (i = 0; i < renderedItems.length; i++) {
-    if (renderedItems[i].artikelid === id) {
+  for (i = 0; i < currentlyRenderedItems.length; i++) {
+    if (currentlyRenderedItems[i].artikelid === id) {
       // e.target.value is the id of the product that more info was requested about
       // Finds its object to get more info
-      console.log(renderedItems[i]);
-      var origin = "<t>" + "Origin: " + renderedItems[i].ursprung + "</t>";
-      var producer = "<t>" + "Producer: " + renderedItems[i].producent + "</t>";
+      console.log(currentlyRenderedItems[i]);
+      var origin = "<t>" + "Origin: " + currentlyRenderedItems[i].ursprung + "</t>";
+      var producer = "<t>" + "Producer: " + currentlyRenderedItems[i].producent + "</t>";
       var closeButton = "<button id=close-button>Close</button>";
       moreInfo = moreInfo.add(
         "<div id=more-info-box>" + origin + producer + closeButton + "</div>"

@@ -27,7 +27,7 @@ $(function() {
 
     $(".more-info-button").on("click", function(e) {
       e.preventDefault();
-      renderMoreInfoAboutItem(e.target.value, beveragesToRender);
+      renderMoreInfoAboutItem(e.target.value);
     });
   });
 });
