@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <!-- Metadata-->
+    <title id="page_title">SAAV's Bar</title>
+    <meta name="Description goes here" content="">
+    <meta name="Pirates of the Caribbean" content="tags go here">
+
+
+    <!-- CSS Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- External CSS sheets -->
+      <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/management.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Oswald" rel="stylesheet">
+
+  </head>
+  <body>
+    <!-- Your code starts here -->
+
+    <header>
+
+      <div class="title">
+        <h1 id="title">Drink Delivery Database System</h1>
+      </div>
+      
+ <div class="info"><span style="font-weight:bold; color:white">Manager: </span><span id="usr" style="color:white">usr</span></div>  
+          
+    </header>
+    <div class="menu">
+      <ul class="type_menu">
+        <a><li id="drinks_list">Full Drinks List</li></a>
+        <a><li id="check_stock">Check Bar Stock</li></a>
+        <a><li id="specials_db">Specials</li></a>
+        <a><li id="shortage_alert">Shortage Alert (!)</li></a>
+      </ul>
+    </div>
+
+
+    <div class="main_section">
+
+        <div class="drink_list" id="drink_database">
+            <!-- Drinks Database loads here -->
+        </div>
+
+
+        <div class="selection_header">
+            <h2 id="your_order">Your Order</h2>
+        </div>
+
+        <div class="selection" id="drink_selection">
+            <!-- Drink Selection pops up here -->
+        </div>
+
+    <div class="checkout">
+      <h2 id="total">Total: SEK 0 :-</h2>
+    </div>
+
+    <footer>
+
+      <!-- LOG OUT BUTTON -->
+      <a onClick="logOut()"><div class="small_button red logout" id="logout">Log Out</div></a>
+
+      <!-- LANGUAGE MENU -->
+      <div class="languages_menu">
+        <a href="#" id="eng"><div class="languages"> <img src="img/eng.png"></div></a>
+        <a href="#" id="sve"><div class="languages"> <img src="img/sve.png"></div></a>
+      </div>
+
+      <!-- UNDO-REDO MENU -->
+      <div class="undo_redo_menu">
+        <a href="#" id="undo" class="fade"><i class="fa fa-arrow-left fa-2x"></i></a>
+        <a href="#" id="redo" class="fade"><i class="fa fa-arrow-right fa-2x"></i></a>
+      </div>
+
+      <!-- PAY BUTTON -->
+      <a href=""><div class="small_button blue" id="pay">Place Stock Order</div></a>
+    </footer>
+
+    <!-- Your code ends here -->
+
+    <!-- External Scripts -->
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <!-- Load Database -->
+    <script src="db/DB.js" type="text/javascript"></script>
+    <script src="db/DB_SYSTEMBOLAGET.js" type="text/javascript"></script>
+    <script src="db/DB_MIKES.js" type="text/javascript"></script>
+
+    <!-- Scripts -->
+    <script src="js/view/view_common.js" type="text/javascript"></script>
+    <script src="js/view/view_management.js" type="text/javascript"></script>
+
+    <script src="js/management.js" type="text/javascript"></script>
+    <script src="js/multilanguage.js" type="text/javascript"></script>
+
+  </body>
+</html>

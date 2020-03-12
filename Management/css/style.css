@@ -1,0 +1,206 @@
+/* The Flying Dutchman
+   style.css
+   Created by 'Pirates of the Caribbean' on 09 of February 2018.
+*/
+
+/*Style Sheet common to all pages*/
+
+h1, h2 {
+    text-align: center;
+}
+
+/*HEADER*/
+header{
+    overflow:hidden;
+    position: relative;
+}
+
+.title {
+    /*background-color: darkgrey;*/
+    float: left;
+    width: 100%;
+}
+
+.info {
+    background-color: #797979;
+    position: absolute;
+    top: 0px;
+    right: 50px;
+}
+
+
+/* BUTTONS */
+
+.small_button {
+    margin: 0.8%;
+    padding:0.8%;
+    width: 15%;
+
+    text-align: center;
+    font-size: 20px;
+
+    cursor:pointer;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    cursor:pointer;
+}
+
+a:hover {
+    color: white;
+}
+
+a:active {
+    color: red;
+}
+
+
+/* LANGUAGE MENU */
+.languages {
+    margin-left: 20%;
+}
+
+.languages img {
+    width: 70px;
+    height: 40px;
+    float: left;
+    padding: 2%;
+   /* border-radius: 30%;*/ /* round the edges*/
+
+}
+
+.languages_menu{
+    bottom: 0px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
+}
+
+/*UNDO-REDO MENU*/
+
+.undo_redo_menu {
+/**    background-color: #a4a4a4;*/
+    float: left;
+    margin: 1%;
+    margin-top: 1%;
+
+
+}
+
+#undo, #redo {
+    color: #A4B9B6;
+    float: none;
+    width: 10%;
+    height: 100%;
+}
+#undo:hover, #redo:hover {
+                 color: white;
+             }
+
+
+.fade {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+.highlight {
+    background: grey; /*#3240ff;*/
+}
+
+.fade2 {
+    background-color: grey;
+    opacity: 0.5;
+    filter: alpha(opacity=40);
+    zoom: 1;
+    pointer-events:none;
+}
+
+/*
+.undo {
+    color: red;
+}
+.redo {
+    color: green;
+} */
+
+/* COLORS */
+.light_green {
+    background-color: #AA8139;
+}
+
+.blue {
+    background: linear-gradient(#AA8139, #84642b);
+}
+
+.orange {
+    background-color: #ff4500;
+}
+
+.red {
+    background: linear-gradient(#AD2535,#8e1f2c);
+}
+.headergreen {
+    background-color: #0C2924;
+}
+
+.darkgreen {
+    background-color: #254540;
+}
+.green {
+    background-color: #567973;
+}
+.backgroundgreen {
+    background-color: #A4B9B6;
+}
+.highlightgreen{
+    background-color: #C0CFCC;
+}
+
+
+.grey {
+    background-color: #676b6d;
+}
+
+.yellow {
+    background-color: #f3ff19;
+}
+
+.beek {
+    background-color: #B9CB00;
+}
+
+.flipper {
+  /*  background-color: #FB6601;*/
+    background: linear-gradient(#254540,#0C2924);
+    border-width: thin;
+    border-style: solid;
+    border-radius: 7px;
+    box-shadow: 2px 2px 10px black, -2px -2px 10px black;
+}
+
+.light_orange {
+    background-color: #fbe104;
+}
+
+.textRed{
+    color: red;
+}
+
+.alert{
+    padding:2px;
+    border: dashed;
+    border-width: 2px;
+    border-color: red;
+}
+
+.textDarkGreen{
+    color: #15443d;
+}
+
+.textLightGreen{
+    color: #96b9a5;
+}
