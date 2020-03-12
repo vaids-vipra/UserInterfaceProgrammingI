@@ -1,18 +1,115 @@
-var currentlyRenderedItems = []
+// To change to english we need to change DB2 to collect from Bevereges_eng instead
+// Beverages_eng är inte satt som en variabel utan bara en enda stor array
 
+var loadedDB = [];
+var currentlyRenderedItems = [];
+var language = getLanguage();
+var moreInformation = false;
+
+/*
 function mergeRenderedMenuItems(currentRendered, newToRender) {
   if (currentRendered.length === 0) {
     return newToRender;
   } else {
-    var mergedArray = currentRendered.concat(newToRender);
-    for (var i = 0; i < mergedArray.length; i++) {
+    console.log(currentRendered)
+    console.log(newToRender)
+    Array.prototype.push.apply(currentRendered, newToRender);
+    console.log(currentRendered)
+    switch (language) {
+      case "swedish":
+        for (var i = 0; i < currentRendered.length; i++) {
+          for (var j = i + 1; j < currentRendered.length; j++) {
+            if (
+              currentRendered[i].artikelid === currentRendered[j].artikelid &&
+              i !== j
+            ) {
+              currentRendered.splice(j--, 1);
+            }
+          }
+        }
+        break;
+      case "english":
+        for (var i = 0; i < currentRendered.length; i++) {
+          for (var j = i + 1; j < currentRendered.length; j++) {
+            if (
+              currentRendered[i].articleid === currentRendered[j].articleid &&
+              i !== j
+            ) {
+              currentRendered.splice(j--, 1);
+            }
+          }
+        }
+        break;
+    }
+    return currentRendered;
+  }
+}
+*/
+
+function removeDuplicate() {
+  switch (language) {
+    case "swedish":
+      for (var i = 0; i < currentlyRenderedItems.length; i++) {
+        if (currentlyRenderedItems[i].artikelid === undefined) {
+          continue;
+        } else {
+          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
+            if (
+              currentlyRenderedItems[i].artikelid ===
+                currentlyRenderedItems[j].artikelid &&
+              i !== j
+            ) {
+              currentlyRenderedItems.splice(j--, 1);
+            }
+          }
+        }
+      }
+      break;
+    case "english":
+      for (var i = 0; i < currentlyRenderedItems.length; i++) {
+        if (currentlyRenderedItems[i].articleid === undefined) {
+          continue;
+        } else {
+          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
+            if (
+              currentlyRenderedItems[i].articleid ===
+                currentlyRenderedItems[j].articleid &&
+              i !== j
+            ) {
+              currentlyRenderedItems.splice(j--, 1);
+            }
+          }
+        }
+      }
+  }
+}
+
+/*
+for (var i = 0; i < mergedArray.length; i++) {
       for (var j = i + 1; j < mergedArray.length; j++) {
         if (mergedArray[i].artikelid === mergedArray[j].artikelid && i !== j) {
           mergedArray.splice(j--, 1);
         }
       }
     }
-    return mergedArray;
+
+*/
+
+function loadDB(language) {
+  switch (language) {
+    case "english":
+      $.getJSON("./../db/Beverages_eng.js", function(data) {
+        loadedDB = data;
+      });
+      break;
+    case "swedish":
+      $.getJSON(
+        "./../db/DBFilesJSON (not used, only for reference)/dutchman_table_sbl_beer.json",
+        function(data) {
+          loadedDB = data;
+        }
+      );
+      break;
   }
 }
 
@@ -29,30 +126,55 @@ function renderItemsToScreen(type) {
     // Currently all beverages with alc % > 30 are placed under liquor
     beveragesToRender = findStrongBeveregesToShow(30); // If liquor was clicked we find all strong bev first
   } else {
-    beveragesToRender = findBeveragesToShow(type, DB2.spirits); // Otherwise we just find all sprits that match our id (I.e. beer or wine atm)
+    beveragesToRender = findBeveragesToShow(type, loadedDB); // Otherwise we just find all sprits that match our id (I.e. beer or wine atm)
   }
 
   var menuItems = $(); // Jquery object that we'll fill with spirits below
+
+  var namePropertyName,
+    pricePropertyName,
+    articleIdPropertyName,
+    moreInfoButtonText,
+    orderButtonText;
+  switch (language) {
+    case "english":
+      namePropertyName = "name";
+      pricePropertyName = "priceinclvat";
+      articleIdPropertyName = "articleid";
+      moreInfoButtonText = "More information";
+      orderButtonText = "Order";
+      break;
+    case "swedish":
+      namePropertyName = "namn";
+      pricePropertyName = "prisinklmoms";
+      articleIdPropertyName = "artikelid";
+      moreInfoButtonText = "Mer information";
+      orderButtonText = "Beställ";
+  }
 
   /**
    * This for loop creates a div for every item that we're gonna render
    * Adds it to the menuItem jquery object
    */
   for (x = 0; x < beveragesToRender.length; x++) {
-    var item = beveragesToRender[x].namn;
+    var item = beveragesToRender[x][namePropertyName];
     var price =
-      "<t>" + "   " + beveragesToRender[x].prisinklmoms + "SEK" + "</t>";
+      "<t>" + "   " + beveragesToRender[x][pricePropertyName] + "SEK" + "</t>";
     var moreInfoBtn =
       "<button class=more-info-button value=" +
-      beveragesToRender[x].artikelid +
-      ">More information</button>";
+      beveragesToRender[x][articleIdPropertyName] +
+      ">" +
+      moreInfoButtonText +
+      "</button>";
     var orderButton =
       "<button class=order-button id=" +
-      beveragesToRender[x].artikelid +
-      ">Order</button>";
+      beveragesToRender[x][articleIdPropertyName] +
+      ">" +
+      orderButtonText +
+      "</button>";
     menuItems = menuItems.add(
       "<div class=menuItem id=" +
-        beveragesToRender[x].artikelid +
+        beveragesToRender[x][articleIdPropertyName] +
         " draggable=true ondragstart=menuItemDragStart(event)>" +
         item +
         price +
@@ -61,7 +183,8 @@ function renderItemsToScreen(type) {
         "</div>"
     );
   }
-  currentlyRenderedItems = beveragesToRender;
+  currentlyRenderedItems = currentlyRenderedItems.concat(beveragesToRender);
+  removeDuplicate();
   $(".beverages-list ").append(menuItems); //Appends all the above created divs to our beverage list
 }
 
@@ -70,14 +193,23 @@ function getCurrentlyRenderedItems() {
 }
 
 function findStrongBeveregesToShow(percentage) {
+  var objectAlcoholPercentageName = "";
+  switch (language) {
+    case "english":
+      objectAlcoholPercentageName = "alcoholstrength";
+      break;
+    case "swedish":
+      objectAlcoholPercentageName = "alkoholhalt";
+      break;
+  }
+
   var strongBeverages = [];
-  for (i = 0; i < DB2.spirits.length; i++) {
-    if (parseFloat(DB2.spirits[i].alkoholhalt) >= percentage) {
+  for (i = 0; i < loadedDB.length; i++) {
+    if (parseFloat(loadedDB[i][objectAlcoholPercentageName]) >= percentage) {
       //Finds spirits from the DB2 with the desired alcohol %
-      strongBeverages.push(DB2.spirits[i]);
+      strongBeverages.push(loadedDB[i]);
     }
   }
-  console.log(strongBeverages.length);
   return findBeveragesToShow("liquor", strongBeverages);
 }
 
@@ -88,13 +220,26 @@ function findStrongBeveregesToShow(percentage) {
  * @param {array} listOfSpirits The array to search for
  */
 function findBeveragesToShow(type, listOfSpirits) {
+  var objectIDPropertyName = "";
+  var objectCategoryPropertyName = "";
+  switch (language) {
+    case "english":
+      objectIDPropertyName = "articleid";
+      objectCategoryPropertyName = "catgegory";
+      break;
+    case "swedish":
+      objectIDPropertyName = "artikelid";
+      objectCategoryPropertyName = "varugrupp";
+      break;
+  }
   var beveragesToShow = [];
   if (type === "liquor") {
     for (i = 0; i < PubDB.spirits.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
-        var spirit;
-        if (PubDB.spirits[i].beverage_id === listOfSpirits[j].artikelid) {
-          console.log(listOfSpirits[j]);
+        if (
+          PubDB.spirits[i].beverage_id ===
+          listOfSpirits[j][objectIDPropertyName]
+        ) {
           beveragesToShow.push(listOfSpirits[j]);
         }
       }
@@ -103,10 +248,13 @@ function findBeveragesToShow(type, listOfSpirits) {
     for (i = 0; i < PubDB.spirits.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
         var spirit = listOfSpirits[j];
-        if (PubDB.spirits[i].beverage_id === spirit.artikelid) {
+        if (
+          PubDB.spirits[i].beverage_id ===
+          listOfSpirits[j][objectIDPropertyName]
+        ) {
           // checks that "varugrupp" ("type of beverage") includes the ID of the clicked menu-tab
           // I.e. if "beer" was clicked the ID is Ã–l, then we look for those that include "Ã–l" in their "varugrupp"
-          if (spirit.varugrupp.includes(type)) {
+          if (spirit[objectCategoryPropertyName].includes(type)) {
             beveragesToShow.push(spirit);
           }
         }
@@ -122,15 +270,47 @@ function findBeveragesToShow(type, listOfSpirits) {
  * @param {array} renderedItems
  */
 function renderMoreInfoAboutItem(id) {
+  var originPropertyName,
+    producerProperyName,
+    articleIdPropertyName,
+    originText,
+    producerText,
+    closeButtonText;
+  switch (language) {
+    case "english":
+      originPropertyName = "countryoforiginlandname";
+      producerProperyName = "producer";
+      articleIdPropertyName = "articleid";
+      originText = "Origin: ";
+      producerText = "Producer: ";
+      closeButtonText = "Close";
+      break;
+    case "swedish":
+      originPropertyName = "ursprunglandnamn";
+      producerProperyName = "producent";
+      articleIdPropertyName = "artikelid";
+      originText = "Ursprungsland: ";
+      producerText = "Producent: ";
+      closeButtonText = "Stäng";
+  }
   var moreInfo = $();
   for (i = 0; i < currentlyRenderedItems.length; i++) {
-    if (currentlyRenderedItems[i].artikelid === id) {
+    if (currentlyRenderedItems[i][articleIdPropertyName] === id) {
       // e.target.value is the id of the product that more info was requested about
       // Finds its object to get more info
       console.log(currentlyRenderedItems[i]);
-      var origin = "<t>" + "Origin: " + currentlyRenderedItems[i].ursprung + "</t>";
-      var producer = "<t>" + "Producer: " + currentlyRenderedItems[i].producent + "</t>";
-      var closeButton = "<button id=close-button>Close</button>";
+      var origin =
+        "<t>" +
+        originText +
+        currentlyRenderedItems[i][originPropertyName] +
+        "</t>";
+      var producer =
+        "<t>" +
+        producerText +
+        currentlyRenderedItems[i][producerProperyName] +
+        "</t>";
+      var closeButton =
+        "<button id=close-button>" + closeButtonText + "</button>";
       moreInfo = moreInfo.add(
         "<div id=more-info-box>" + origin + producer + closeButton + "</div>"
       );
@@ -141,6 +321,11 @@ function renderMoreInfoAboutItem(id) {
     $("#more-info-box").remove();
   });
 }
+
+function getMoreInfoBoolValue() {
+  return moreInformation;
+}
+
 /**
  * Specifies what data to get from the dragged item
  * Here it is the artikel id of the item
@@ -164,5 +349,15 @@ function allowDrop(e) {
 function menuItemDropped(e) {
   e.preventDefault();
   var data = e.dataTransfer.getData("text");
-  addItemAndRenderToScreen(data);
+  console.log(data)
+  addItem(data);
 }
+
+/*         The way to access stuff despite language but was pretty slow:
+
+var entriesFromDbAtIndex = Object.entries(loadedDB[3]); // Returns an array containing all of the [key, value] pairs of a given object's own enumerable string properties.
+        var temp = entriesFromDbAtIndex[10][1]; // [19] is the percentage entry and [1] extracts that number
+        console.log(entriesFromDbAtIndex);
+        console.log(temp); 
+        
+        */

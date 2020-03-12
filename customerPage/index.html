@@ -15,16 +15,17 @@
     <link rel="stylesheet" href="css/styles.css?v=1.0" />
   </head>
   <body>
-    <h1>Header</h1>
-
-    <div class="customer-page-container">
-      <!-- 			<button disabled id="tempButton">TEST FILL UP STORAGE</button> -->
+    <header>
+      <button class="language-button" id="english">English</button>
+      <button class="language-button" id="swedish">Svenska</button>
+    </header>
+    <div class="page-container">
       <div class="menu-tabs">
-        <h3 class="menu-header">Beverages</h3>
+        <h3 class="menu-header"></h3>
         <ul class="beverages-list">
-          <li id="Ã–l">Beer</li>
-          <li id="vin">Wine</li>
-          <li id="liquor">Liquor</li>
+          <li id="Ã–l"></li>
+          <li id="vin"></li>
+          <li id="liquor"></li>
         </ul>
       </div>
       <div
@@ -32,21 +33,36 @@
         ondragover="allowDrop(event)"
         ondrop="menuItemDropped(event)"
       >
-        <h3>Orders</h3>
+        <h3 id="order-header"></h3>
         <div class="order-list-div">
-          <ul class="order-list">
-            Order list
-          </ul>
+          <ul class="order-list"></ul>
         </div>
-        <button>Place Order</button>
+        <span id="price-box"></span>
+        <form>
+          <input type="radio" name="payment" id="pay-in-app" value="in-app"/>
+          <label for="pay-in-app">Pay in app</label>
+          <input type="radio" name="payment" id="pay-to-bartender" value="to-bartender"/>
+          <label for="pay-to-bartender">Pay to bartender</label>
+        </form>
+        <button id="order-button" onclick="orderButtonClicked()"></button>
       </div>
     </div>
+    <div class="image-container">
+      <img src="./../db/images/WeeklyMash145-1.jpg" />
+      <h2>- Dutchmans Pub -</h2>
+      <t id="text-on-picture"></t>
+    </div>
+    <!-- <div class="image-container">
+      <h1>– Dutchmans Pub –</h1>
+      <img src="./../db/images/Beer+Taps+Web.jpg" />
+    </div> -->
   </body>
   <script></script>
   <script src="customerPage.js"></script>
   <script src="menuAPI.js"></script>
   <script src="orderCart.js"></script>
   <script type="text/javascript" src="./../db/Beverages.js"></script>
+  <script type="text/javascript" src="./../db/Beverages_eng.js"></script>
   <script type="text/javascript" src="./../db/orderDB.js"></script>
   <script type="text/javascript" src="./../db/DBLoaded.js"></script>
   <script type="text/javascript" src="./../db/loader.js"></script>
