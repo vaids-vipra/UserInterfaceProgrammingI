@@ -4,6 +4,7 @@ var language = "swedish";
 var db = [];
 var moreInformation = false;
 var currentlyRenderedType = "";
+var activeTable;
 
 $(function() {
   loadDB(language);
@@ -58,6 +59,10 @@ function changeRenderedItems(type) {
       renderMoreInfoAboutItem(e.target.value);
     }
   });
+}
+
+function setTableForCustomer(table) {
+  console.log("table is: " + table);
 }
 
 // Helper function to access the global variable
