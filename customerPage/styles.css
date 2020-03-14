@@ -12,6 +12,8 @@ body {
   height: 100%;
 }
 
+.customer-page-header{
+}
 .page-container {
   /*   background: url("./../db/images/Beer+Taps+Web.jpg");
  */
@@ -24,6 +26,7 @@ body {
 
 .menu-tabs {
   background-color: snow;
+  flex-grow: 1;
 }
 
 .menu-tabs header {
@@ -31,7 +34,7 @@ body {
 }
 
 .menu-tabs ul li {
-  margin: 5%;
+  margin: 5px;
 }
 
 .order-cart-container {

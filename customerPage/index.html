@@ -16,12 +16,31 @@
     <link rel="stylesheet" href="css/styles.css?v=1.0" />
   </head>
   <body>
-    <header>
+    <header class="customer-page-header">
       <button class="language-button" id="english">English</button>
       <button class="language-button" id="swedish">Svenska</button>
       <button id="open-login-button" onClick="openLogin(event)">
         Open Login Form
       </button>
+        <div class="footer-div">
+          <!-- Just temp for test to see if it would work
+          <p>Or continue as a guest by choosing table:</p>
+          <form id="table-form" onsubmit="{tableChosen(event)}">
+            <input type="text" id="table-number" name="table-number" />
+            <input type="submit" value="continue" />
+          </form>
+          -->
+        </div>
+    </header>
+    <div class="page-container">
+      <div class="menu-tabs">
+        <h3 class="menu-header"></h3>
+        <ul class="beverages-list">
+          <li id="Ã–l"></li>
+          <li id="vin"></li>
+          <li id="liquor"></li>
+        </ul>
+      </div>
       <div class="login-page-container">
         <div class="loginbox">
           <img src="avatar.png" class="avatar" />
@@ -52,25 +71,6 @@
             Close login form
           </button>
         </div>
-        <div class="footer-div">
-          <!-- Just temp for test to see if it would work
-          <p>Or continue as a guest by choosing table:</p>
-          <form id="table-form" onsubmit="{tableChosen(event)}">
-            <input type="text" id="table-number" name="table-number" />
-            <input type="submit" value="continue" />
-          </form>
-          -->
-        </div>
-      </div>
-    </header>
-    <div class="page-container">
-      <div class="menu-tabs">
-        <h3 class="menu-header"></h3>
-        <ul class="beverages-list">
-          <li id="Ã–l"></li>
-          <li id="vin"></li>
-          <li id="liquor"></li>
-        </ul>
       </div>
       <div
         class="order-cart-container"
@@ -116,41 +116,4 @@
   <script type="text/javascript" src="./../db/DBLoaded.js"></script>
   <script type="text/javascript" src="./../db/loader.js"></script>
   <script type="text/javascript" src="./../db/AvailableItemsDB.js"></script>
-  <script language="JavaScript">
-    $(document).ready(function() {
-      $(".login-page-container").hide();
-    });
-
-    function validate() {
-      var uName = document.getElementById("uname").value;
-      var passwd = document.getElementById("passwd").value;
-      var myData = DB.users;
-      var userFound = false;
-
-      for (var i = 0; i < myData.length; i++) {
-        if (myData[i].username == uName && myData[i].password == passwd) {
-          userFound = true;
-        }
-      }
-      if (userFound) {
-        localStorage.setItem("loggedUser", uName);
-        document.location.href = "index.html";
-        console.log(document.location.href);
-      } else {
-        alert("Login failed for user '" + uName + "'...try again later!");
-      }
-    }
-
-    function openLogin(e) {
-      e.preventDefault();
-      $(".login-page-container").show();
-      $("#open-login-button").hide();
-    }
-
-    function closeForm(e) {
-      e.preventDefault();
-      $(".login-page-container").hide();
-      $("#open-login-button").show();
-    }
-  </script>
 </html>
