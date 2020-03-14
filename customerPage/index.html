@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="stylesheet" type="text/css" href="./../style-loginpage.css" />
     <link rel="import" href="./../backend//index.html" />
     <meta charset="utf-8" />
     <title>CustomerPage</title>
@@ -18,6 +19,49 @@
     <header>
       <button class="language-button" id="english">English</button>
       <button class="language-button" id="swedish">Svenska</button>
+      <button id="open-login-button" onClick="openLogin(event)">
+        Open Login Form
+      </button>
+      <div class="login-page-container">
+        <div class="loginbox">
+          <img src="avatar.png" class="avatar" />
+          <h1>Login Here</h1>
+          <form action="javascript:validate();" method="post">
+            <p>Username</p>
+            <input
+              type="text"
+              name=""
+              placeholder="Enter Username"
+              name="uname"
+              id="uname"
+              required="true"
+            />
+            <p>Password</p>
+            <input
+              type="password"
+              name=""
+              placeholder="Enter Password"
+              name="passwd"
+              id="passwd"
+              required="true"
+            />
+            <input type="submit" value="Login" />
+            <a href="#">Lost your password?</a><br />
+          </form>
+          <button id="close-login-form" onclick="closeForm(event)">
+            Close login form
+          </button>
+        </div>
+        <div class="footer-div">
+          <!-- Just temp for test to see if it would work
+          <p>Or continue as a guest by choosing table:</p>
+          <form id="table-form" onsubmit="{tableChosen(event)}">
+            <input type="text" id="table-number" name="table-number" />
+            <input type="submit" value="continue" />
+          </form>
+          -->
+        </div>
+      </div>
     </header>
     <div class="page-container">
       <div class="menu-tabs">
@@ -39,9 +83,14 @@
         </div>
         <span id="price-box"></span>
         <form>
-          <input type="radio" name="payment" id="pay-in-app" value="in-app"/>
+          <input type="radio" name="payment" id="pay-in-app" value="in-app" />
           <label for="pay-in-app">Pay in app</label>
-          <input type="radio" name="payment" id="pay-to-bartender" value="to-bartender"/>
+          <input
+            type="radio"
+            name="payment"
+            id="pay-to-bartender"
+            value="to-bartender"
+          />
           <label for="pay-to-bartender">Pay to bartender</label>
         </form>
         <button id="order-button" onclick="orderButtonClicked()"></button>
@@ -67,4 +116,41 @@
   <script type="text/javascript" src="./../db/DBLoaded.js"></script>
   <script type="text/javascript" src="./../db/loader.js"></script>
   <script type="text/javascript" src="./../db/AvailableItemsDB.js"></script>
+  <script language="JavaScript">
+    $(document).ready(function() {
+      $(".login-page-container").hide();
+    });
+
+    function validate() {
+      var uName = document.getElementById("uname").value;
+      var passwd = document.getElementById("passwd").value;
+      var myData = DB.users;
+      var userFound = false;
+
+      for (var i = 0; i < myData.length; i++) {
+        if (myData[i].username == uName && myData[i].password == passwd) {
+          userFound = true;
+        }
+      }
+      if (userFound) {
+        localStorage.setItem("loggedUser", uName);
+        document.location.href = "index.html";
+        console.log(document.location.href);
+      } else {
+        alert("Login failed for user '" + uName + "'...try again later!");
+      }
+    }
+
+    function openLogin(e) {
+      e.preventDefault();
+      $(".login-page-container").show();
+      $("#open-login-button").hide();
+    }
+
+    function closeForm(e) {
+      e.preventDefault();
+      $(".login-page-container").hide();
+      $("#open-login-button").show();
+    }
+  </script>
 </html>
