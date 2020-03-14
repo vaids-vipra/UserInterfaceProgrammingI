@@ -9,6 +9,8 @@ $(function() {
   $(".login-page-container").hide();
   loadDB(language);
   setLanguage();
+  $("#order-button").hide();
+  $(".order-cart-container").hide();
   $(".language-button").on("click", function(e) {
     if (language !== e.target.id) {
       language = e.target.id;

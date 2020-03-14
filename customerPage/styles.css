@@ -33,10 +33,6 @@ body {
   text-align: center;
 }
 
-.menu-tabs ul li {
-  margin: 5px;
-}
-
 .order-cart-container {
   border: 2px black solid;
   text-align: center;
@@ -52,6 +48,7 @@ body {
 }
 
 .menu-tabs ul li {
+  margin: 5px;
   list-style-type: none;
   display: inline-block;
   background: #3e8db3;
@@ -64,9 +61,11 @@ body {
 .menuItem {
   background: #f5f5f5;
   border: 1px black solid;
+  width: 50%;
+  padding: 5px;
 }
 .menuItem t {
-  color: red;
+  color: black;
 }
 
 #more-info-box {
@@ -77,6 +76,37 @@ body {
 #close-button {
   font: normal 1em/1 Arial, sans-serif;
   content: "\2716";
+}
+
+.order-item {
+  margin-bottom: 5px;
+  border-bottom: 0.5px lightgrey solid;
+}
+
+.plus-button {
+  background: green;
+  margin-left: 5px;
+  border: 1px black solid;
+
+}
+
+.minus-button {
+  background: lightgrey;
+  border: 1px black solid;
+  margin-right: 5px;
+}
+
+#payment-form {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#order-button {
+  font-size: 15px;
+  margin-top: 5px;
+  background: orange;
+  border: 1px black solid;
+  margin-bottom: 5px;
 }
 
 .image-container {
