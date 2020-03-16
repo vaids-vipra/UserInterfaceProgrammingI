@@ -12,6 +12,8 @@ body {
   height: 100%;
 }
 
+.customer-page-header{
+}
 .page-container {
   /*   background: url("./../db/images/Beer+Taps+Web.jpg");
  */
@@ -24,14 +26,11 @@ body {
 
 .menu-tabs {
   background-color: snow;
+  flex-grow: 1;
 }
 
 .menu-tabs header {
   text-align: center;
-}
-
-.menu-tabs ul li {
-  margin: 5%;
 }
 
 .order-cart-container {
@@ -49,21 +48,32 @@ body {
 }
 
 .menu-tabs ul li {
+  margin: 5px;
   list-style-type: none;
   display: inline-block;
   background: #3e8db3;
+  font-size: 22px;
   padding: 6px 15px;
   border-radius: 50%;
   color: #383838;
 }
 
 
+.active-li {
+  font-size: 26px !important;
+
+}
 .menuItem {
   background: #f5f5f5;
   border: 1px black solid;
-}
+  width: 50%;
+  padding: 5px;
+  border-radius: 10%;
+/*   display: flex;
+  flex-direction: row;
+ */}
 .menuItem t {
-  color: red;
+  color: black;
 }
 
 #more-info-box {
@@ -72,8 +82,40 @@ body {
 }
 
 #close-button {
-  font: normal 1em/1 Arial, sans-serif;
-  content: "\2716";
+  font-size: 14px;
+  border-radius: 50%;
+  width: 25%;  
+}
+
+.order-item {
+  margin-bottom: 5px;
+  border-bottom: 0.5px lightgrey solid;
+}
+
+.plus-button {
+  background: green;
+  margin-left: 5px;
+  border: 1px black solid;
+
+}
+
+.minus-button {
+  background: lightgrey;
+  border: 1px black solid;
+  margin-right: 5px;
+}
+
+#payment-form {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#order-button {
+  font-size: 15px;
+  margin-top: 5px;
+  background: orange;
+  border: 1px black solid;
+  margin-bottom: 5px;
 }
 
 .image-container {

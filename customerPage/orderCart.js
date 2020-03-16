@@ -2,6 +2,8 @@ var currentOrders = []; // Temp way to see which orders the user currently have 
 var renderedItems = [];
 
 function addItem(itemID) {
+  $("#order-button").show();
+  $(".order-cart-container").show();
   var language = getLanguage();
   if (currentOrders.length > 0) {
     for (i = 0; i < currentOrders.length; i++) {
@@ -30,6 +32,8 @@ function addItem(itemID) {
  */
 function emptyOrderCart() {
   $(".order-item").remove();
+  currentOrders = [];
+  upDatePrice();
 }
 
 function removeItem(itemID) {
@@ -75,6 +79,8 @@ function renderOrders() {
     if (orderList[i].language === "swedish") {
       for (var j = 0; j < renderedItems.length; j++) {
         if (orderList[i].id === renderedItems[j].artikelid) {
+          // TODO: Remove code duplication
+
           $(".order-item").remove(); // Ugly but removes the previous orders before they're added again with some changes... To avoid duplicates
           var name = "<t>" + renderedItems[j].namn + "</t>";
           var quantity = "<t>" + orderList[i].quantity + "</t>";
@@ -84,9 +90,9 @@ function renderOrders() {
               ">" +
               name +
               " " +
-              "<button onclick=removeItem(event.target.parentElement.id)>-</button>" +
+              "<button class=minus-button onclick=removeItem(event.target.parentElement.id)>-</button>" +
               quantity +
-              "<button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
+              "<button class=plus-button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
               "</div>"
           );
         }
@@ -103,15 +109,16 @@ function renderOrders() {
               ">" +
               name +
               " " +
-              "<button onclick=removeItem(event.target.parentElement.id)>-</button>" +
+              "<button class=minus-button onclick=removeItem(event.target.parentElement.id)>-</button>" +
               quantity +
-              "<button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
+              "<button class=plus-button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
               "</div>"
           );
         }
       }
     }
   }
+
 
   upDatePrice();
   $(".order-list-div").append(orderItems);
@@ -120,7 +127,7 @@ function renderOrders() {
 function upDatePrice() {
   $("#price-box t").remove();
   var price = getPriceOfOrder();
-  $("#price-box").append("<t>" + price + "</t>");
+  $("#price-box").append("<t>" + price + " SEK</t>");
 }
 
 function getPriceOfOrder() {

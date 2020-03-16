@@ -3,6 +3,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <link rel="stylesheet" type="text/css" href="./../style-loginpage.css" />
     <link rel="import" href="./../backend//index.html" />
     <meta charset="utf-8" />
     <title>CustomerPage</title>
@@ -15,9 +16,21 @@
     <link rel="stylesheet" href="css/styles.css?v=1.0" />
   </head>
   <body>
-    <header>
+    <header class="customer-page-header">
       <button class="language-button" id="english">English</button>
       <button class="language-button" id="swedish">Svenska</button>
+      <button id="open-login-button" onClick="openLogin(event)">
+        Open Login Form
+      </button>
+        <div class="footer-div">
+          <!-- Just temp for test to see if it would work
+          <p>Or continue as a guest by choosing table:</p>
+          <form id="table-form" onsubmit="{tableChosen(event)}">
+            <input type="text" id="table-number" name="table-number" />
+            <input type="submit" value="continue" />
+          </form>
+          -->
+        </div>
     </header>
     <div class="page-container">
       <div class="menu-tabs">
@@ -27,6 +40,37 @@
           <li id="vin"></li>
           <li id="liquor"></li>
         </ul>
+      </div>
+      <div class="login-page-container">
+        <div class="loginbox">
+          <img src="avatar.png" class="avatar" />
+          <h1>Login Here</h1>
+          <form action="javascript:validate();" method="post">
+            <p>Username</p>
+            <input
+              type="text"
+              name=""
+              placeholder="Enter Username"
+              name="uname"
+              id="uname"
+              required="true"
+            />
+            <p>Password</p>
+            <input
+              type="password"
+              name=""
+              placeholder="Enter Password"
+              name="passwd"
+              id="passwd"
+              required="true"
+            />
+            <input type="submit" value="Login" />
+            <a href="#">Lost your password?</a><br />
+          </form>
+          <button id="close-login-form" onclick="closeForm(event)">
+            Close login form
+          </button>
+        </div>
       </div>
       <div
         class="order-cart-container"
@@ -38,13 +82,18 @@
           <ul class="order-list"></ul>
         </div>
         <span id="price-box"></span>
-        <form>
-          <input type="radio" name="payment" id="pay-in-app" value="in-app"/>
+        <form id="payment-form">
+          <input type="radio" name="payment" id="pay-in-app" value="in-app" />
           <label for="pay-in-app">Pay in app</label>
-          <input type="radio" name="payment" id="pay-to-bartender" value="to-bartender"/>
+          <input
+            type="radio"
+            name="payment"
+            id="pay-to-bartender"
+            value="to-bartender"
+          />
           <label for="pay-to-bartender">Pay to bartender</label>
         </form>
-        <button id="order-button" onclick="orderButtonClicked()"></button>
+        <button id="order-button" onclick="orderButtonClicked()">Beställ</button>
       </div>
     </div>
     <div class="image-container">
