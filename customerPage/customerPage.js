@@ -25,7 +25,8 @@ $(function() {
    * When a menu-"header" (i.e. beer) is clicked
    */
   $(".beverages-list li").on("click", function(e) {
-   // $(".beverages-list li" + "#" + e.target.id).active();
+    $(".beverages-list li").removeClass("active-li");
+    $(".beverages-list li" + "#" + e.target.id).toggleClass("active-li");
     e.preventDefault();
     currentlyRenderedType = e.target.id;
     changeRenderedItems(e.target.id);
@@ -63,7 +64,6 @@ function closeForm(e) {
   $(".login-page-container").hide();
   $("#open-login-button").show();
 }
-
 
 function changeRenderedItems(type) {
   // This calls the function in the menuAPI that selects which bevereges to show
@@ -120,8 +120,8 @@ function setLanguage() {
       $("#order-button").text("Order");
       $("#price-box").text("Price: ");
       $("#text-on-picture").text("A family owned pub since 1904");
-      $("#open-login-button").text("Press here to login")
-      $("#close-login-form").text("Close login form")
+      $("#open-login-button").text("Press here to login");
+      $("#close-login-form").text("Close login form");
       break;
     case "swedish":
       $(".menu-header").text("Drycker");
@@ -133,7 +133,7 @@ function setLanguage() {
       $("#price-box").text("Pris: ");
       $("#text-on-picture").text("En familjeägd pub sedan 1904");
       $("#open-login-button").text("Klicka här för att logga in");
-      $("#close-login-form").text("Stäng ner")
+      $("#close-login-form").text("Stäng ner");
       break;
   }
 }

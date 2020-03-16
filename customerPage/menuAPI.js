@@ -275,6 +275,7 @@ function renderMoreInfoAboutItem(id) {
     articleIdPropertyName,
     originText,
     producerText,
+    ecological,
     closeButtonText;
   switch (language) {
     case "english":
@@ -282,6 +283,7 @@ function renderMoreInfoAboutItem(id) {
       producerProperyName = "producer";
       articleIdPropertyName = "articleid";
       originText = "Origin: ";
+      ecological = "Ecological";
       producerText = "Producer: ";
       closeButtonText = "Close";
       break;
@@ -290,6 +292,7 @@ function renderMoreInfoAboutItem(id) {
       producerProperyName = "producent";
       articleIdPropertyName = "artikelid";
       originText = "Ursprungsland: ";
+      ecological = "Ekologisk";
       producerText = "Producent: ";
       closeButtonText = "Stäng";
   }
@@ -349,7 +352,7 @@ function allowDrop(e) {
 function menuItemDropped(e) {
   e.preventDefault();
   var data = e.dataTransfer.getData("text");
-  console.log(data)
+  console.log(data);
   addItem(data);
 }
 

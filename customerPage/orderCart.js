@@ -119,6 +119,7 @@ function renderOrders() {
     }
   }
 
+
   upDatePrice();
   $(".order-list-div").append(orderItems);
 }
