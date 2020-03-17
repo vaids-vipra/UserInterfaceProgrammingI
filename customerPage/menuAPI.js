@@ -47,40 +47,20 @@ function mergeRenderedMenuItems(currentRendered, newToRender) {
 */
 
 function removeDuplicate() {
-  switch (language) {
-    case "swedish":
-      for (var i = 0; i < currentlyRenderedItems.length; i++) {
-        if (currentlyRenderedItems[i].artikelid === undefined) {
-          continue;
-        } else {
-          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
-            if (
-              currentlyRenderedItems[i].artikelid ===
-                currentlyRenderedItems[j].artikelid &&
-              i !== j
-            ) {
-              currentlyRenderedItems.splice(j--, 1);
-            }
-          }
+  for (var i = 0; i < currentlyRenderedItems.length; i++) {
+    if (currentlyRenderedItems[i].artikelid === undefined) {
+      continue;
+    } else {
+      for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
+        if (
+          currentlyRenderedItems[i].artikelid ===
+            currentlyRenderedItems[j].artikelid &&
+          i !== j
+        ) {
+          currentlyRenderedItems.splice(j--, 1);
         }
       }
-      break;
-    case "english":
-      for (var i = 0; i < currentlyRenderedItems.length; i++) {
-        if (currentlyRenderedItems[i].articleid === undefined) {
-          continue;
-        } else {
-          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
-            if (
-              currentlyRenderedItems[i].articleid ===
-                currentlyRenderedItems[j].articleid &&
-              i !== j
-            ) {
-              currentlyRenderedItems.splice(j--, 1);
-            }
-          }
-        }
-      }
+    }
   }
 }
 
@@ -95,7 +75,7 @@ for (var i = 0; i < mergedArray.length; i++) {
 
 */
 
-function loadDB(language) {
+/* function loadDB(language) {
   switch (language) {
     case "english":
       $.getJSON("./../db/Beverages_eng.js", function(data) {
@@ -111,7 +91,7 @@ function loadDB(language) {
       );
       break;
   }
-}
+} */
 
 /**
  * This function creates a jquery object with a list of rendered items that we have in the temp (???) PubDB
@@ -126,28 +106,27 @@ function renderItemsToScreen(type) {
     // Currently all beverages with alc % > 30 are placed under liquor
     beveragesToRender = findStrongBeveregesToShow(30); // If liquor was clicked we find all strong bev first
   } else {
-    beveragesToRender = findBeveragesToShow(type, loadedDB); // Otherwise we just find all sprits that match our id (I.e. beer or wine atm)
+    beveragesToRender = findBeveragesToShow(type, getDB()); // Otherwise we just find all sprits that match our id (I.e. beer or wine atm)
   }
 
   var menuItems = $(); // Jquery object that we'll fill with spirits below
 
-  var namePropertyName,
-    pricePropertyName,
-    articleIdPropertyName,
-    moreInfoButtonText,
-    orderButtonText;
+  var namePropertyName = "namn";
+  var pricePropertyName = "prisinklmoms";
+  var articleIdPropertyName = "artikelid";
+  var moreInfoButtonText, orderButtonText;
   switch (language) {
     case "english":
-      namePropertyName = "name";
-      pricePropertyName = "priceinclvat";
-      articleIdPropertyName = "articleid";
+      //namePropertyName = "name";
+      //pricePropertyName = "priceinclvat";
+      //articleIdPropertyName = "articleid";
       moreInfoButtonText = "More information";
       orderButtonText = "Order";
       break;
     case "swedish":
-      namePropertyName = "namn";
-      pricePropertyName = "prisinklmoms";
-      articleIdPropertyName = "artikelid";
+      // namePropertyName = "namn";
+      // pricePropertyName = "prisinklmoms";
+      // articleIdPropertyName = "artikelid";
       moreInfoButtonText = "Mer information";
       orderButtonText = "Beställ";
   }
@@ -159,7 +138,7 @@ function renderItemsToScreen(type) {
   for (x = 0; x < beveragesToRender.length; x++) {
     var item = beveragesToRender[x][namePropertyName];
     var price =
-      "<t>" + "   " + beveragesToRender[x][pricePropertyName] + "SEK" + "</t>";
+      "<t>" + "   " + beveragesToRender[x].salePrice + "SEK" + "</t>";
     var moreInfoBtn =
       "<button class=more-info-button value=" +
       beveragesToRender[x][articleIdPropertyName] +
@@ -193,17 +172,18 @@ function getCurrentlyRenderedItems() {
 }
 
 function findStrongBeveregesToShow(percentage) {
-  var objectAlcoholPercentageName = "";
-  switch (language) {
+  var objectAlcoholPercentageName = "alkoholhalt";
+  /* switch (language) {
     case "english":
       objectAlcoholPercentageName = "alcoholstrength";
       break;
     case "swedish":
       objectAlcoholPercentageName = "alkoholhalt";
       break;
-  }
+  } */
 
   var strongBeverages = [];
+  loadedDB = getDB();
   for (i = 0; i < loadedDB.length; i++) {
     if (parseFloat(loadedDB[i][objectAlcoholPercentageName]) >= percentage) {
       //Finds spirits from the DB2 with the desired alcohol %
@@ -220,9 +200,9 @@ function findStrongBeveregesToShow(percentage) {
  * @param {array} listOfSpirits The array to search for
  */
 function findBeveragesToShow(type, listOfSpirits) {
-  var objectIDPropertyName = "";
-  var objectCategoryPropertyName = "";
-  switch (language) {
+  var objectIDPropertyName = "artikelid";
+  var objectCategoryPropertyName = "varugrupp";
+  /* switch (language) {
     case "english":
       objectIDPropertyName = "articleid";
       objectCategoryPropertyName = "catgegory";
@@ -231,36 +211,42 @@ function findBeveragesToShow(type, listOfSpirits) {
       objectIDPropertyName = "artikelid";
       objectCategoryPropertyName = "varugrupp";
       break;
-  }
+  } */
   var beveragesToShow = [];
   if (type === "liquor") {
-    for (i = 0; i < PubDB.spirits.length; i++) {
+    for (i = 0; i < DB_STOCK.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
-        if (
-          PubDB.spirits[i].beverage_id ===
-          listOfSpirits[j][objectIDPropertyName]
-        ) {
-          beveragesToShow.push(listOfSpirits[j]);
+        if (DB_STOCK[i].article_id === listOfSpirits[j][objectIDPropertyName]) {
+          var itemToPush = {
+            salePrice: DB_STOCK[i].sale_price,
+            country: DB_STOCK[i].country,
+            ...listOfSpirits[j]
+          }
+          console.log(itemToPush)
+          beveragesToShow.push(itemToPush);
         }
       }
     }
   } else {
-    for (i = 0; i < PubDB.spirits.length; i++) {
+    for (i = 0; i < DB_STOCK.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
         var spirit = listOfSpirits[j];
-        if (
-          PubDB.spirits[i].beverage_id ===
-          listOfSpirits[j][objectIDPropertyName]
-        ) {
+        if (DB_STOCK[i].article_id === spirit[objectIDPropertyName]) {
+          var spiritCategory = spirit[objectCategoryPropertyName];
           // checks that "varugrupp" ("type of beverage") includes the ID of the clicked menu-tab
           // I.e. if "beer" was clicked the ID is Ã–l, then we look for those that include "Ã–l" in their "varugrupp"
-          if (spirit[objectCategoryPropertyName].includes(type)) {
-            beveragesToShow.push(spirit);
-          }
+          if (spiritCategory.toLowerCase().includes(type)) {
+            var itemToPush = {
+              salePrice: DB_STOCK[i].sale_price,
+              country: DB_STOCK[i].country,
+              ...spirit
+            }
+            beveragesToShow.push(itemToPush);          }
         }
       }
     }
   }
+  console.log(beveragesToShow);
   return beveragesToShow;
 }
 
@@ -270,18 +256,15 @@ function findBeveragesToShow(type, listOfSpirits) {
  * @param {array} renderedItems
  */
 function renderMoreInfoAboutItem(id) {
-  var originPropertyName,
-    producerProperyName,
-    articleIdPropertyName,
-    originText,
-    producerText,
-    ecological,
-    closeButtonText;
+  var originPropertyName = "ursprunglandnamn";
+  var producerProperyName = "producent";
+  var articleIdPropertyName = "artikelid";
+  var originText, producerText, closeButtonText;
   switch (language) {
     case "english":
-      originPropertyName = "countryoforiginlandname";
-      producerProperyName = "producer";
-      articleIdPropertyName = "articleid";
+      originPropertyName = "country";
+      // producerProperyName = "producer";
+      // articleIdPropertyName = "articleid";
       originText = "Origin: ";
       ecological = "Ecological";
       producerText = "Producer: ";
@@ -289,8 +272,8 @@ function renderMoreInfoAboutItem(id) {
       break;
     case "swedish":
       originPropertyName = "ursprunglandnamn";
-      producerProperyName = "producent";
-      articleIdPropertyName = "artikelid";
+      // producerProperyName = "producent";
+      //  articleIdPropertyName = "artikelid";
       originText = "Ursprungsland: ";
       ecological = "Ekologisk";
       producerText = "Producent: ";
@@ -363,4 +346,48 @@ var entriesFromDbAtIndex = Object.entries(loadedDB[3]); // Returns an array cont
         console.log(entriesFromDbAtIndex);
         console.log(temp); 
         
+        */
+
+/* MULTILANGUGE SUPPORT
+        function removeDuplicate() {
+  switch (language) {
+    case "swedish":
+      for (var i = 0; i < currentlyRenderedItems.length; i++) {
+        if (currentlyRenderedItems[i].artikelid === undefined) {
+          continue;
+        } else {
+          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
+            if (
+              currentlyRenderedItems[i].artikelid ===
+                currentlyRenderedItems[j].artikelid &&
+              i !== j
+            ) {
+              currentlyRenderedItems.splice(j--, 1);
+            }
+          }
+        }
+      }
+      break;
+    case "english":
+      for (var i = 0; i < currentlyRenderedItems.length; i++) {
+        if (currentlyRenderedItems[i].articleid === undefined) {
+          continue;
+        } else {
+          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
+            if (
+              currentlyRenderedItems[i].articleid ===
+                currentlyRenderedItems[j].articleid &&
+              i !== j
+            ) {
+              currentlyRenderedItems.splice(j--, 1);
+            }
+          }
+        }
+      }
+  }
+}
+
+
+
+
         */

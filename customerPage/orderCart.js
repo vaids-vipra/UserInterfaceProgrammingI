@@ -4,14 +4,12 @@ var renderedItems = [];
 function addItem(itemID) {
   $("#order-button").show();
   $(".order-cart-container").show();
-  var language = getLanguage();
   if (currentOrders.length > 0) {
     for (i = 0; i < currentOrders.length; i++) {
       if (itemID === currentOrders[i].id) {
         // Checks if the added item already exists
         newQuant = currentOrders[i].quantity + 1;
         currentOrders[i].quantity = newQuant; // Then we just increase its quant and doesn't make a new entry
-        currentOrders[i].language = language;
         renderOrders();
         return 0; // To break out of the function
       }
@@ -20,8 +18,7 @@ function addItem(itemID) {
   // Otherwise we just make a new object to push into the orders
   newOrder = {
     id: itemID,
-    quantity: 1,
-    language
+    quantity: 1
   };
   currentOrders.push(newOrder);
   renderOrders();
@@ -72,54 +69,27 @@ function getOrders() {
 function renderOrders() {
   renderedItems = getCurrentlyRenderedItems();
   var orderList = getOrders();
-  console.log(renderedItems);
-  console.log(orderList);
   var orderItems = $();
   for (var i = 0; i < orderList.length; i++) {
-    if (orderList[i].language === "swedish") {
-      for (var j = 0; j < renderedItems.length; j++) {
-        if (orderList[i].id === renderedItems[j].artikelid) {
-          // TODO: Remove code duplication
-
-          $(".order-item").remove(); // Ugly but removes the previous orders before they're added again with some changes... To avoid duplicates
-          var name = "<t>" + renderedItems[j].namn + "</t>";
-          var quantity = "<t>" + orderList[i].quantity + "</t>";
-          orderItems = orderItems.add(
-            "<div class=order-item id=" +
-              orderList[i].id +
-              ">" +
-              name +
-              " " +
-              "<button class=minus-button onclick=removeItem(event.target.parentElement.id)>-</button>" +
-              quantity +
-              "<button class=plus-button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
-              "</div>"
-          );
-        }
-      }
-    } else {
-      for (var j = 0; j < renderedItems.length; j++) {
-        if (orderList[i].id === renderedItems[j].articleid) {
-          $(".order-item").remove(); // Ugly but removes the previous orders before they're added again with some changes... To avoid duplicates
-          var name = "<t>" + renderedItems[j].name + "</t>";
-          var quantity = "<t>" + orderList[i].quantity + "</t>";
-          orderItems = orderItems.add(
-            "<div class=order-item id=" +
-              orderList[i].id +
-              ">" +
-              name +
-              " " +
-              "<button class=minus-button onclick=removeItem(event.target.parentElement.id)>-</button>" +
-              quantity +
-              "<button class=plus-button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
-              "</div>"
-          );
-        }
+    for (var j = 0; j < renderedItems.length; j++) {
+      if (orderList[i].id === renderedItems[j].artikelid) {
+        $(".order-item").remove(); // Ugly but removes the previous orders before they're added again with some changes... To avoid duplicates
+        var name = "<t>" + renderedItems[j].namn + "</t>";
+        var quantity = "<t>" + orderList[i].quantity + "</t>";
+        orderItems = orderItems.add(
+          "<div class=order-item id=" +
+            orderList[i].id +
+            ">" +
+            name +
+            " " +
+            "<button class=minus-button onclick=removeItem(event.target.parentElement.id)>-</button>" +
+            quantity +
+            "<button class=plus-button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
+            "</div>"
+        );
       }
     }
   }
-
-
   upDatePrice();
   $(".order-list-div").append(orderItems);
 }
@@ -131,24 +101,20 @@ function upDatePrice() {
 }
 
 function getPriceOfOrder() {
+  console.log("calleds")
+  console.log(currentOrders)
+  console.log(renderedItems)
   var price = 0;
   for (var i = 0; i < currentOrders.length; i++) {
-    if (currentOrders[i].language === "swedish") {
-      for (var j = 0; j < renderedItems.length; j++) {
-        if (currentOrders[i].id === renderedItems[j].artikelid) {
-          price =
-            price +
-            parseFloat(renderedItems[j].prisinklmoms) *
-              parseFloat(currentOrders[i].quantity);
-        }
-      }
-    }
-    if (currentOrders[i].language === "english") {
-      for (var j = 0; j < renderedItems.length; j++) {
-        if (currentOrders[i].id === renderedItems[j].articleid) {
-          price =
-            price + renderedItems[j].priceinclvat * currentOrders[i].quantity;
-        }
+    for (var j = 0; j < renderedItems.length; j++) {
+      if (currentOrders[i].id === renderedItems[j].artikelid) {
+        console.log("match")
+        console.log(currentOrders[i])
+        console.log(renderedItems[j])
+        price =
+          price +
+          parseFloat(renderedItems[j].prisinklmoms) *
+            parseFloat(currentOrders[i].quantity);
       }
     }
   }
@@ -160,6 +126,12 @@ function addItemAndRenderToScreen(itemID) {
   addItem(itemID);
   renderOrders();
 }
+
+
+
+
+// SOME OLD FUNCTIONS WITH OLD DB
+// IGNORE
 
 /*
 function renderOrders() {
@@ -211,4 +183,77 @@ function renderOrders() {
               "<button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
               "</div>"
           );
+*/
+
+/*
+OLD LANGUAGE SUPPORT
+RENDERORDERS
+if (orderList[i].language === "swedish") {
+      for (var j = 0; j < renderedItems.length; j++) {
+        if (orderList[i].id === renderedItems[j].artikelid) {
+          // TODO: Remove code duplication
+
+          $(".order-item").remove(); // Ugly but removes the previous orders before they're added again with some changes... To avoid duplicates
+          var name = "<t>" + renderedItems[j].namn + "</t>";
+          var quantity = "<t>" + orderList[i].quantity + "</t>";
+          orderItems = orderItems.add(
+            "<div class=order-item id=" +
+              orderList[i].id +
+              ">" +
+              name +
+              " " +
+              "<button class=minus-button onclick=removeItem(event.target.parentElement.id)>-</button>" +
+              quantity +
+              "<button class=plus-button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
+              "</div>"
+          );
+        }
+      }
+    } else {
+      for (var j = 0; j < renderedItems.length; j++) {
+        if (orderList[i].id === renderedItems[j].articleid) {
+          $(".order-item").remove(); // Ugly but removes the previous orders before they're added again with some changes... To avoid duplicates
+          var name = "<t>" + renderedItems[j].name + "</t>";
+          var quantity = "<t>" + orderList[i].quantity + "</t>";
+          orderItems = orderItems.add(
+            "<div class=order-item id=" +
+              orderList[i].id +
+              ">" +
+              name +
+              " " +
+              "<button class=minus-button onclick=removeItem(event.target.parentElement.id)>-</button>" +
+              quantity +
+              "<button class=plus-button onclick=addItemAndRenderToScreen(event.target.parentElement.id)>+</button>" +
+              "</div>"
+          );
+        }
+      }
+    }
+
+  function getPriceOfOrder() {
+  var price = 0;
+  for (var i = 0; i < currentOrders.length; i++) {
+    if (currentOrders[i].language === "swedish") {
+      for (var j = 0; j < renderedItems.length; j++) {
+        if (currentOrders[i].id === renderedItems[j].artikelid) {
+          price =
+            price +
+            parseFloat(renderedItems[j].prisinklmoms) *
+              parseFloat(currentOrders[i].quantity);
+        }
+      }
+    }
+    if (currentOrders[i].language === "english") {
+      for (var j = 0; j < renderedItems.length; j++) {
+        if (currentOrders[i].id === renderedItems[j].articleid) {
+          price =
+            price + renderedItems[j].priceinclvat * currentOrders[i].quantity;
+        }
+      }
+    }
+  }
+  price = Math.floor(price * 100) / 100;
+  return price;
+}
+
 */

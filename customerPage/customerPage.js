@@ -6,8 +6,10 @@ var moreInformation = false;
 var currentlyRenderedType = "";
 
 $(function() {
+  db = DB_SYSTEMBOLAGET;
+  console.log(db);
   $(".login-page-container").hide();
-  loadDB(language);
+  // loadDB(language);
   setLanguage();
   $("#order-button").hide();
   $(".order-cart-container").hide();
@@ -16,20 +18,27 @@ $(function() {
       language = e.target.id;
       setLanguage();
       console.log("language: " + language);
-      loadDB(language);
+      //   loadDB(language);
       upDatePrice();
-      //changeRenderedItems(currentlyRenderedType); // This doesn't work as intended, fix if time available
+      console.log(currentlyRenderedType)
+      changeRenderedItems(currentlyRenderedType);
     }
   });
   /**
    * When a menu-"header" (i.e. beer) is clicked
    */
   $(".beverages-list li").on("click", function(e) {
-    $(".beverages-list li").removeClass("active-li");
-    $(".beverages-list li" + "#" + e.target.id).toggleClass("active-li");
     e.preventDefault();
-    currentlyRenderedType = e.target.id;
-    changeRenderedItems(e.target.id);
+    if (e.target.id === currentlyRenderedType) { // Pressed the same button
+      currentlyRenderedType = "";
+      $(".menuItem").remove();
+      $(".beverages-list li").removeClass("active-li");
+    } else {
+      currentlyRenderedType = e.target.id;
+      changeRenderedItems(e.target.id);
+      $(".beverages-list li").removeClass("active-li");
+      $(".beverages-list li" + "#" + e.target.id).toggleClass("active-li");  
+    }
   });
 });
 
@@ -66,6 +75,9 @@ function closeForm(e) {
 }
 
 function changeRenderedItems(type) {
+  if(type === ""){ // Bug handling, find out why this is needed
+    return;
+  }
   // This calls the function in the menuAPI that selects which bevereges to show
   renderItemsToScreen(type);
 
@@ -113,9 +125,10 @@ function setLanguage() {
   switch (language) {
     case "english":
       $(".menu-header").text("Bevereges");
-      $("#Ã–l").text("Beer");
+      $("#öl").text("Beer");
       $("#vin").text("Wine");
       $("#liquor").text("Liquor");
+      $("#special").text("Mike's choices")
       $("#order-header").text("Items in cart");
       $("#order-button").text("Order");
       $("#price-box").text("Price: ");
@@ -125,9 +138,10 @@ function setLanguage() {
       break;
     case "swedish":
       $(".menu-header").text("Drycker");
-      $("#Ã–l").text("Öl");
+      $("#öl").text("Öl");
       $("#vin").text("Vin");
       $("#liquor").text("Sprit");
+      $("#special").text("Mikes tips")
       $("#order-header").text("Varor");
       $("#order-button").text("Beställ");
       $("#price-box").text("Pris: ");

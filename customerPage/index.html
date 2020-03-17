@@ -22,23 +22,24 @@
       <button id="open-login-button" onClick="openLogin(event)">
         Open Login Form
       </button>
-        <div class="footer-div">
-          <!-- Just temp for test to see if it would work
+      <div class="footer-div">
+        <!-- Just temp for test to see if it would work
           <p>Or continue as a guest by choosing table:</p>
           <form id="table-form" onsubmit="{tableChosen(event)}">
             <input type="text" id="table-number" name="table-number" />
             <input type="submit" value="continue" />
           </form>
           -->
-        </div>
+      </div>
     </header>
     <div class="page-container">
       <div class="menu-tabs">
         <h3 class="menu-header"></h3>
         <ul class="beverages-list">
-          <li id="Ã–l"></li>
+          <li id="öl"></li>
           <li id="vin"></li>
           <li id="liquor"></li>
+          <!--           <li id="special"></li -->
         </ul>
       </div>
       <div class="login-page-container">
@@ -93,7 +94,9 @@
           />
           <label for="pay-to-bartender">Pay to bartender</label>
         </form>
-        <button id="order-button" onclick="orderButtonClicked()">Beställ</button>
+        <button id="order-button" onclick="orderButtonClicked()">
+          Beställ
+        </button>
       </div>
     </div>
     <div class="image-container">
@@ -111,6 +114,11 @@
   <script src="menuAPI.js"></script>
   <script src="orderCart.js"></script>
   <script type="text/javascript" src="./../db/Beverages.js"></script>
+  <script type="text/javascript" src="./../Management/db/DB.js"></script>
+  <script
+    type="text/javascript"
+    src="./../Management/db/DB_SYSTEMBOLAGET.js"
+  ></script>
   <script type="text/javascript" src="./../db/Beverages_eng.js"></script>
   <script type="text/javascript" src="./../db/orderDB.js"></script>
   <script type="text/javascript" src="./../db/DBLoaded.js"></script>
