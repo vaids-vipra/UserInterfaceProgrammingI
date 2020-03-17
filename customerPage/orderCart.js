@@ -113,7 +113,7 @@ function getPriceOfOrder() {
         console.log(renderedItems[j])
         price =
           price +
-          parseFloat(renderedItems[j].prisinklmoms) *
+          parseFloat(renderedItems[j].salePrice) *
             parseFloat(currentOrders[i].quantity);
       }
     }
