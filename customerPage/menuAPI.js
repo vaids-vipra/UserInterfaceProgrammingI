@@ -167,7 +167,7 @@ function renderItemsToScreen(type) {
       moreInfoButtonText +
       "</button>";
     var orderButton =
-      "<button class=order-button id=" +
+      "<button class=order-menu-button id=" +
       beveragesToRender[x][articleIdPropertyName] +
       ">" +
       orderButtonText +
