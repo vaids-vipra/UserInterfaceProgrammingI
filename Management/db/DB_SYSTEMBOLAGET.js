@@ -552,7 +552,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1013201",
         "artikelid": "633539",
         "varnummer": "10132",
@@ -627,7 +627,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1014301",
         "artikelid": "734788",
         "varnummer": "10143",
@@ -652,7 +652,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1014804",
         "artikelid": "638540",
         "varnummer": "10148",
@@ -677,7 +677,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1015001",
         "artikelid": "638546",
         "varnummer": "10150",
@@ -702,7 +702,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1015101",
         "artikelid": "707630",
         "varnummer": "10151",
@@ -727,7 +727,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1015301",
         "artikelid": "723096",
         "varnummer": "10153",
@@ -802,7 +802,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1015902",
         "artikelid": "854266",
         "varnummer": "10159",
@@ -827,7 +827,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1016101",
         "artikelid": "633586",
         "varnummer": "10161",
@@ -852,7 +852,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1016301",
         "artikelid": "639227",
         "varnummer": "10163",
@@ -877,7 +877,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  
+    }, {
         "nr": "1016501",
         "artikelid": "639258",
         "varnummer": "10165",
@@ -902,7 +902,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1016601",
         "artikelid": "639416",
         "varnummer": "10166",
@@ -927,7 +927,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1016701",
         "artikelid": "639451",
         "varnummer": "10167",
@@ -952,7 +952,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  
+    }, {
         "nr": "1016801",
         "artikelid": "645592",
         "varnummer": "10168",
@@ -1002,7 +1002,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  
+    }, {
         "nr": "1017301",
         "artikelid": "644726",
         "varnummer": "10173",
@@ -1027,7 +1027,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TST",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1017402",
         "artikelid": "644813",
         "varnummer": "10174",
@@ -1052,7 +1052,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TST",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1017801",
         "artikelid": "647552",
         "varnummer": "10178",
@@ -1077,7 +1077,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1017901",
         "artikelid": "647558",
         "varnummer": "10179",
@@ -1102,7 +1102,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1018401",
         "artikelid": "548413",
         "varnummer": "10184",
@@ -1127,7 +1127,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1018801",
         "artikelid": "548443",
         "varnummer": "10188",
@@ -1152,7 +1152,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1019202",
         "artikelid": "817010",
         "varnummer": "10192",
@@ -1177,7 +1177,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1068101",
         "artikelid": "817833",
         "varnummer": "10681",
@@ -1227,7 +1227,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TST",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1019402",
         "artikelid": "404133",
         "varnummer": "10194",
@@ -1243,7 +1243,7 @@ var DB_SYSTEMBOLAGET = [
         "forslutning": "Plastkork\/syntetkork",
         "ursprung": "",
         "ursprunglandnamn": "Sverige",
-        "producent": "",
+        "producent": "Sahlins Brygghus",
         "leverantor": "Rommehed Wine & Spirits AB",
         "argang": "",
         "provadargang": "",
@@ -1252,7 +1252,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSS",
         "ekologisk": "1",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1019701",
         "artikelid": "673516",
         "varnummer": "10197",
@@ -1277,7 +1277,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1019801",
         "artikelid": "659727",
         "varnummer": "10198",
@@ -1302,7 +1302,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TST",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  
+    }, {
         "nr": "102",
         "artikelid": "2",
         "varnummer": "1",
@@ -1327,7 +1327,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1020404",
         "artikelid": "548667",
         "varnummer": "10204",
@@ -1377,7 +1377,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1022301",
         "artikelid": "405628",
         "varnummer": "10223",
@@ -1427,7 +1427,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1023901",
         "artikelid": "195565",
         "varnummer": "10239",
@@ -1477,7 +1477,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1025001",
         "artikelid": "678924",
         "varnummer": "10250",
@@ -1527,7 +1527,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1027101",
         "artikelid": "563070",
         "varnummer": "10271",
@@ -1552,7 +1552,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1027202",
         "artikelid": "643947",
         "varnummer": "10272",
@@ -1602,7 +1602,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSS",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1030402",
         "artikelid": "539660",
         "varnummer": "10304",
@@ -1652,7 +1652,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TST",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1030902",
         "artikelid": "489875",
         "varnummer": "10309",
@@ -1677,7 +1677,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1031001",
         "artikelid": "52586",
         "varnummer": "10310",
@@ -1752,7 +1752,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1031701",
         "artikelid": "678936",
         "varnummer": "10317",
@@ -1777,7 +1777,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  
+    }, {
         "nr": "1032304",
         "artikelid": "490844",
         "varnummer": "10323",
@@ -1952,7 +1952,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1035602",
         "artikelid": "539688",
         "varnummer": "10356",
@@ -2002,7 +2002,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  
+    }, {
         "nr": "1036302",
         "artikelid": "600603",
         "varnummer": "10363",
@@ -2052,7 +2052,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1037101",
         "artikelid": "673941",
         "varnummer": "10371",
@@ -2102,7 +2102,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1039302",
         "artikelid": "676690",
         "varnummer": "10393",
@@ -2152,7 +2152,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "10401",
         "artikelid": "181",
         "varnummer": "104",
@@ -2177,7 +2177,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {   
+    }, {
         "nr": "1040201",
         "artikelid": "579762",
         "varnummer": "10402",
@@ -2227,7 +2227,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, { 
+    }, {
         "nr": "1040701",
         "artikelid": "48981",
         "varnummer": "10407",
@@ -2252,7 +2252,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  
+    }, {
         "nr": "1041102",
         "artikelid": "688531",
         "varnummer": "10411",
@@ -2327,7 +2327,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "BS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {  //'sherry picking' below       // blubb            
+    }, {  //'sherry picking' below       // blubb
         "nr": "1043001",
         "artikelid": "510253",
         "varnummer": "10430",
@@ -2677,7 +2677,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "1124601",
         "artikelid": "50229",
         "varnummer": "11246",
@@ -2702,7 +2702,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "1",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "1131512",
         "artikelid": "508039",
         "varnummer": "11315",
@@ -2977,7 +2977,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "TSE",
         "ekologisk": "0",
         "koscher": "0"
-    }, {           
+    }, {
         "nr": "1180915",
         "artikelid": "639670",
         "varnummer": "11809",
@@ -3077,7 +3077,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "1208501",
         "artikelid": "32777",
         "varnummer": "12085",
@@ -3177,7 +3177,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {           
+    }, {
         "nr": "123512",
         "artikelid": "508074",
         "varnummer": "1235",
@@ -3202,7 +3202,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "126015",
         "artikelid": "507849",
         "varnummer": "1260",
@@ -3302,7 +3302,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "BS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "137901",
         "artikelid": "10538",
         "varnummer": "1379",
@@ -3452,7 +3452,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "145414",
         "artikelid": "586898",
         "varnummer": "1454",
@@ -3652,7 +3652,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "153603",
         "artikelid": "1132",
         "varnummer": "1536",
@@ -3702,7 +3702,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "154803",
         "artikelid": "166018",
         "varnummer": "1548",
@@ -3977,7 +3977,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "161103",
         "artikelid": "395750",
         "varnummer": "1611",
@@ -4002,7 +4002,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "163412",
         "artikelid": "508168",
         "varnummer": "1634",
@@ -4027,7 +4027,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "1643401",
         "artikelid": "16594",
         "varnummer": "16434",
@@ -4052,7 +4052,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "1645708",
         "artikelid": "37500",
         "varnummer": "16457",
@@ -4077,7 +4077,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "166501",
         "artikelid": "509794",
         "varnummer": "1665",
@@ -4102,7 +4102,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "BS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "166903",
         "artikelid": "7627",
         "varnummer": "1669",
@@ -4152,7 +4152,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "170702",
         "artikelid": "434810",
         "varnummer": "1707",
@@ -4177,7 +4177,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FS",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "171903",
         "artikelid": "720056",
         "varnummer": "1719",
@@ -4402,7 +4402,7 @@ var DB_SYSTEMBOLAGET = [
         "sortiment": "FSÖ",
         "ekologisk": "0",
         "koscher": "0"
-    }, {            
+    }, {
         "nr": "194501",
         "artikelid": "51063",
         "varnummer": "1945",

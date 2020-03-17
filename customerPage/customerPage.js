@@ -7,7 +7,8 @@ var currentlyRenderedType = "";
 
 $(function() {
   db = DB_SYSTEMBOLAGET;
-  console.log(db);
+  console.log(db)
+  console.log(DB_STOCK)
   $(".login-page-container").hide();
   // loadDB(language);
   setLanguage();
@@ -128,7 +129,7 @@ function setLanguage() {
       $("#öl").text("Beer");
       $("#vin").text("Wine");
       $("#liquor").text("Liquor");
-      $("#special").text("Mike's choices")
+      $("#other").text("Other spirits")
       $("#order-header").text("Items in cart");
       $("#order-button").text("Order");
       $("#price-box").text("Price: ");
@@ -141,7 +142,7 @@ function setLanguage() {
       $("#öl").text("Öl");
       $("#vin").text("Vin");
       $("#liquor").text("Sprit");
-      $("#special").text("Mikes tips")
+      $("#other").text("Other spirits")
       $("#order-header").text("Varor");
       $("#order-button").text("Beställ");
       $("#price-box").text("Pris: ");

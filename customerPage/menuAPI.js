@@ -5,6 +5,7 @@ var loadedDB = [];
 var currentlyRenderedItems = [];
 var language = getLanguage();
 var moreInformation = false;
+const strongPercentage = 35;
 
 /*
 function mergeRenderedMenuItems(currentRendered, newToRender) {
@@ -104,7 +105,7 @@ function renderItemsToScreen(type) {
   $(".menuItem").remove(); // Removes all items from the menu since we want to render new
   if (type === "liquor") {
     // Currently all beverages with alc % > 30 are placed under liquor
-    beveragesToRender = findStrongBeveregesToShow(30); // If liquor was clicked we find all strong bev first
+    beveragesToRender = findStrongBeveregesToShow(strongPercentage); // If liquor was clicked we find all strong bev first
   } else {
     beveragesToRender = findBeveragesToShow(type, getDB()); // Otherwise we just find all sprits that match our id (I.e. beer or wine atm)
   }
@@ -114,12 +115,13 @@ function renderItemsToScreen(type) {
   var namePropertyName = "namn";
   var pricePropertyName = "prisinklmoms";
   var articleIdPropertyName = "artikelid";
-  var moreInfoButtonText, orderButtonText;
+  var moreInfoButtonText, orderButtonText, organic;
   switch (language) {
     case "english":
       //namePropertyName = "name";
       //pricePropertyName = "priceinclvat";
       //articleIdPropertyName = "articleid";
+      organic = "Organic";
       moreInfoButtonText = "More information";
       orderButtonText = "Order";
       break;
@@ -127,6 +129,7 @@ function renderItemsToScreen(type) {
       // namePropertyName = "namn";
       // pricePropertyName = "prisinklmoms";
       // articleIdPropertyName = "artikelid";
+      organic = "Ekologisk";
       moreInfoButtonText = "Mer information";
       orderButtonText = "Beställ";
   }
@@ -137,8 +140,9 @@ function renderItemsToScreen(type) {
    */
   for (x = 0; x < beveragesToRender.length; x++) {
     var item = beveragesToRender[x][namePropertyName];
-    var price =
-      "<t>" + "   " + beveragesToRender[x].salePrice + "SEK" + "</t>";
+    var price = "<t>" + "   " + beveragesToRender[x].salePrice + "SEK" + "</t>";
+    var alcoholPercentage =
+      "<t>" + " " + beveragesToRender[x].alkoholhalt + "</t>";
     var moreInfoBtn =
       "<button class=more-info-button value=" +
       beveragesToRender[x][articleIdPropertyName] +
@@ -157,6 +161,7 @@ function renderItemsToScreen(type) {
         " draggable=true ondragstart=menuItemDragStart(event)>" +
         item +
         price +
+        alcoholPercentage +
         moreInfoBtn +
         orderButton +
         "</div>"
@@ -216,14 +221,42 @@ function findBeveragesToShow(type, listOfSpirits) {
   if (type === "liquor") {
     for (i = 0; i < DB_STOCK.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
-        if (DB_STOCK[i].article_id === listOfSpirits[j][objectIDPropertyName]) {
+        if (
+          DB_STOCK[i].article_id === listOfSpirits[j][objectIDPropertyName] &&
+          DB_STOCK[i].in_stock > 0
+        ) {
           var itemToPush = {
             salePrice: DB_STOCK[i].sale_price,
             country: DB_STOCK[i].country,
             ...listOfSpirits[j]
-          }
-          console.log(itemToPush)
+          };
+          console.log(itemToPush);
           beveragesToShow.push(itemToPush);
+        }
+      }
+    }
+  }
+  if (type === "other") {
+    for (i = 0; i < DB_STOCK.length; i++) {
+      for (j = 0; j < listOfSpirits.length; j++) {
+        var spirit = listOfSpirits[j];
+        if (DB_STOCK[i].article_id === spirit[objectIDPropertyName]) {
+          var spiritCategory = spirit[objectCategoryPropertyName];
+          // checks that "varugrupp" ("type of beverage") includes the ID of the clicked menu-tab
+          // I.e. if "beer" was clicked the ID is öl, then we look for those that include "öl" in their "varugrupp"
+
+          if (
+            !spiritCategory.toLowerCase().includes("öl") &&
+            !spiritCategory.toLowerCase().includes("vin") &&
+            parseFloat(spirit.alkoholhalt) < strongPercentage
+          ) {
+            var itemToPush = {
+              salePrice: DB_STOCK[i].sale_price,
+              country: DB_STOCK[i].country,
+              ...spirit
+            };
+            beveragesToShow.push(itemToPush);
+          }
         }
       }
     }
@@ -234,14 +267,16 @@ function findBeveragesToShow(type, listOfSpirits) {
         if (DB_STOCK[i].article_id === spirit[objectIDPropertyName]) {
           var spiritCategory = spirit[objectCategoryPropertyName];
           // checks that "varugrupp" ("type of beverage") includes the ID of the clicked menu-tab
-          // I.e. if "beer" was clicked the ID is Ã–l, then we look for those that include "Ã–l" in their "varugrupp"
+          // I.e. if "beer" was clicked the ID is öl, then we look for those that include "öl" in their "varugrupp"
+
           if (spiritCategory.toLowerCase().includes(type)) {
             var itemToPush = {
               salePrice: DB_STOCK[i].sale_price,
               country: DB_STOCK[i].country,
               ...spirit
-            }
-            beveragesToShow.push(itemToPush);          }
+            };
+            beveragesToShow.push(itemToPush);
+          }
         }
       }
     }
@@ -259,14 +294,17 @@ function renderMoreInfoAboutItem(id) {
   var originPropertyName = "ursprunglandnamn";
   var producerProperyName = "producent";
   var articleIdPropertyName = "artikelid";
-  var originText, producerText, closeButtonText;
+  var kosherToDOM = "";
+  var ecoToDOM = "";
+  var originText, producerText, closeButtonText, organic, kosher;
   switch (language) {
     case "english":
       originPropertyName = "country";
       // producerProperyName = "producer";
       // articleIdPropertyName = "articleid";
       originText = "Origin: ";
-      ecological = "Ecological";
+      organic = "Organic";
+      kosher = "Kosher";
       producerText = "Producer: ";
       closeButtonText = "Close";
       break;
@@ -275,16 +313,24 @@ function renderMoreInfoAboutItem(id) {
       // producerProperyName = "producent";
       //  articleIdPropertyName = "artikelid";
       originText = "Ursprungsland: ";
-      ecological = "Ekologisk";
+      kosher = "Kosher";
+      organic = "Ekologisk";
       producerText = "Producent: ";
       closeButtonText = "Stäng";
   }
   var moreInfo = $();
   for (i = 0; i < currentlyRenderedItems.length; i++) {
     if (currentlyRenderedItems[i][articleIdPropertyName] === id) {
+      console.log(currentlyRenderedItems[i]);
+      if (currentlyRenderedItems[i].koscher === "1") {
+        kosherToDOM = "<t>" + kosher + "</t>";
+      }
+
+      if (currentlyRenderedItems[i].ekologisk === "1") {
+        ecoToDOM = "<t>" + organic + "</t>";
+      }
       // e.target.value is the id of the product that more info was requested about
       // Finds its object to get more info
-      console.log(currentlyRenderedItems[i]);
       var origin =
         "<t>" +
         originText +
@@ -298,7 +344,13 @@ function renderMoreInfoAboutItem(id) {
       var closeButton =
         "<button id=close-button>" + closeButtonText + "</button>";
       moreInfo = moreInfo.add(
-        "<div id=more-info-box>" + origin + producer + closeButton + "</div>"
+        "<div id=more-info-box>" +
+          origin +
+          producer +
+          ecoToDOM +
+          kosherToDOM +
+          closeButton +
+          "</div>"
       );
     }
   }
