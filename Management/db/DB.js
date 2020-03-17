@@ -24,17 +24,6 @@ var DB_CUSTOMERS = [
         "vip": true
     },
     {
-        "customer_id": "C00001",
-        "password": "mauro123",
-        "username": "mauro",
-        "first_name": "Mauro",
-        "last_name": "Pappaterra",
-        "email": "Mauro.Pappaterra@it.uu.se",
-        "phone": "0704811411",
-        "credit": 1000000000,
-        "vip": true
-    },
-    {
         "customer_id": "C00002",
         "password": "elsa123",
         "username": "elsa",
@@ -43,50 +32,6 @@ var DB_CUSTOMERS = [
         "email": "elsa.Slattegard@it.uu.se",
         "phone": "0701517627",
         "credit": 1530,
-        "vip": true
-    },
-    {
-        "customer_id": "C00003",
-        "password": "jenny123",
-        "username": "jenny",
-        "first_name": "Jenny",
-        "last_name": "Olsson",
-        "email": "jenny.olsson@it.uu.se",
-        "phone": "0701503294",
-        "credit": 1700,
-        "vip": true
-    },
-    {
-        "customer_id": "C00004",
-        "password": "yawen123",
-        "username": "yawen",
-        "first_name": "Yawen",
-        "last_name": "Yi",
-        "email": "Yawen.yi@it.uu.se",
-        "phone": "0706569560",
-        "credit": 1250,
-        "vip": true
-    },
-    {
-        "customer_id": "C00005",
-        "password": "hassan123",
-        "username": "hassan",
-        "first_name": "Hassan",
-        "last_name": "Odimi",
-        "email": "hassan.odimi@it.uu.se",
-        "phone": "0705349276",
-        "credit": 955,
-        "vip": true
-    },
-    {
-        "customer_id": "C00006",
-        "password": "c6",
-        "username": "ervtod",
-        "first_name": "Ervin",
-        "last_name": "Todd",
-        "email": "ervin.todd@it.uu.se",
-        "phone": "0702339018",
-        "credit": 720,
         "vip": true
     },
     {
@@ -319,52 +264,7 @@ var DB_BARTENDERS = [
         "last_name": "Ender",
         "email": "bart.ender@it.uu.se",
         "phone": "0000000000"
-    },
-    {
-        "bartender_id": "B00001",
-        "password": "hassan123",
-        "username": "hassan",
-        "first_name": "HASSAN",
-        "last_name": "Blackjack",
-        "email": "hassan.odimi@it.uu.se",
-        "phone": "0705794586"
-    },
-    {
-        "bartender_id": "B00002",
-        "password": "elsa123",
-        "username": "elsa",
-        "first_name": "Elsa",
-        "last_name": "Larsson",
-        "email": "livianus.zhao@it.uu.se",
-        "phone": "0701524432"
-    },
-    {
-        "bartender_id": "B00003",
-        "password": "mauro123",
-        "username": "mauro",
-        "first_name": "Mauro",
-        "last_name": "The Godfather",
-        "email": "eulalia.coughlan@it.uu.se",
-        "phone": "0702647034"
-    },
-    {
-        "bartender_id": "B00004",
-        "password": "jenny123",
-        "username": "jenny",
-        "first_name": "Jenny",
-        "last_name": "Augustin",
-        "email": "edric.augustin@it.uu.se",
-        "phone": "0707685685"
-    },
-    {
-        "bartender_id": "B00005",
-        "password": "yawen123",
-        "username": "yawen",
-        "first_name": "Yawen",
-        "last_name": "Van",
-        "email": "sidika.van@it.uu.se",
-        "phone": "0704331612"
-    },
+    }
 ];
 
 var DB_MANAGERS =[
@@ -385,24 +285,6 @@ var DB_MANAGERS =[
         "last_name": "Ger",
         "email": "mana.ger@it.uu.se",
         "phone": "0000000000"
-    },
-    {
-        "manager_id": "M00001",
-        "password": "mauro123",
-        "username": "mauro",
-        "first_name": "Mauro",
-        "last_name": "Pappaterra",
-        "email": "mauro.pappaterra@gmail.com",
-        "phone": "0706412621"
-    },
-    {
-        "manager_id": "M00002",
-        "password": "man2",
-        "username": "man2",
-        "first_name": "Giacinta",
-        "last_name": "Mikkelsen",
-        "email": "giacinta.mikkelsen@it.uu.se",
-        "phone": "0703913087"
     }
 ]
 
