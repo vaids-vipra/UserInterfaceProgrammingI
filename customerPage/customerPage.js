@@ -80,7 +80,7 @@ function changeRenderedItems(type) {
   /**
    * Someone clicked order-button
    */
-  $(".order-button").on("click", function(e) {
+  $(".order-menu-button").on("click", function(e) {
     e.preventDefault();
     addItem(e.target.id); // Calls the order API
   });
