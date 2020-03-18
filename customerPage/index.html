@@ -17,8 +17,22 @@
   </head>
   <body>
     <header class="customer-page-header">
-      <button class="language-button" id="english">English</button>
-      <button class="language-button" id="swedish">Svenska</button>
+      <button class="language-button" id="english">
+        <img
+          id="english"
+          class="button-flag"
+          src="./../Management/img/eng.png"
+        />
+      </button>
+      <!--English-->
+      <button class="language-button" id="swedish">
+        <img
+          id="swedish"
+          class="button-flag"
+          src="./../Management/img/sve.png"
+        />
+      </button>
+      <!--Swedish-->
       <button id="open-login-button" onClick="openLogin(event)">
         Open Login Form
       </button>
@@ -45,10 +59,10 @@
       </div>
       <div class="login-page-container">
         <div class="loginbox">
-          <img src="avatar.png" class="avatar" />
-          <h1>Login Here</h1>
-          <form action="javascript:validate();" method="post">
-            <p>Username</p>
+          <!--           <img src="avatar.png" class="avatar" /> -->
+          <h1 id="login-box-header">Login Here</h1>
+          <form id="login-form" action="javascript:validate();" method="post">
+            <p id="login-box-username">Username</p>
             <input
               type="text"
               name=""
@@ -57,7 +71,7 @@
               id="uname"
               required="true"
             />
-            <p>Password</p>
+            <p id="login-box-password">Password</p>
             <input
               type="password"
               name=""
@@ -66,8 +80,8 @@
               id="passwd"
               required="true"
             />
-            <input type="submit" value="Login" />
-            <a href="#">Lost your password?</a><br />
+            <input type="submit" value="Login" id="loginbox-login-button" />
+            <a href="#" id="lost-password">Lost your password?</a><br />
           </form>
           <button id="close-login-form" onclick="closeForm(event)">
             Close login form
@@ -116,6 +130,7 @@
   <script src="orderCart.js"></script>
   <script type="text/javascript" src="./../db/Beverages.js"></script>
   <script type="text/javascript" src="./../Management/db/DB.js"></script>
+  <script type="text/javascript" src="./../loginAPI.js"></script>
   <script
     type="text/javascript"
     src="./../Management/db/DB_SYSTEMBOLAGET.js"

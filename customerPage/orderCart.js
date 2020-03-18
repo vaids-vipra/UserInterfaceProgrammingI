@@ -1,13 +1,17 @@
 var currentOrders = []; // Temp way to see which orders the user currently have in their basket, should be in a DB in the future??
 var renderedItems = [];
 
+
+/**
+ * Function to add item to cart
+ * @param {string} itemID 
+ */
 function addItem(itemID) {
-  $("#order-button").show();
-  $(".order-cart-container").show();
+  $(".order-cart-container").show(); // The cart should be shown now that it's >0 items in it
+  // We have orders
   if (currentOrders.length > 0) {
     for (i = 0; i < currentOrders.length; i++) {
-      if (itemID === currentOrders[i].id) {
-        // Checks if the added item already exists
+      if (itemID === currentOrders[i].id) {         // Checks if the added item already exists
         newQuant = currentOrders[i].quantity + 1;
         currentOrders[i].quantity = newQuant; // Then we just increase its quant and doesn't make a new entry
         renderOrders();
@@ -32,15 +36,19 @@ function emptyOrderCart() {
   currentOrders = [];
   upDatePrice();
 }
+/**
+ * Removes an item from the cart
+ * @param {string} itemID 
+ */
 
 function removeItem(itemID) {
-  for (var i = 0; i < currentOrders.length; i++) {
-    if (itemID === currentOrders[i].id) {
-      if (currentOrders[i].quantity > 1) {
+  for (var i = 0; i < currentOrders.length; i++) { 
+    if (itemID === currentOrders[i].id) { // Found the item in currentOrders
+      if (currentOrders[i].quantity > 1) { 
+        // Just change the quantity
         var newQuant = currentOrders[i].quantity - 1;
-        currentOrders[i].quantity = newQuant;
-        console.log(currentOrders);
-      } else {
+        currentOrders[i].quantity = newQuant; 
+      } else { // SHould be removed
         currentOrders.splice(i, 1);
         if (currentOrders.length === 0) {
           emptyOrderCart(); // No orders are left
@@ -51,15 +59,19 @@ function removeItem(itemID) {
   renderOrders();
 }
 
+/**
+ * TODO
+ */
+
 function orderButtonClicked() {
   emptyOrderCart();
   alert("This needs to integrate with the bartender etc");
 }
 
+/**
+ * Helper function to return the current orders
+ */
 function getOrders() {
-  // Here we should get order from a specific user/table id etc
-  // Right now it's just the one though :(
-
   return currentOrders;
 }
 
@@ -101,16 +113,10 @@ function upDatePrice() {
 }
 
 function getPriceOfOrder() {
-  console.log("calleds")
-  console.log(currentOrders)
-  console.log(renderedItems)
   var price = 0;
   for (var i = 0; i < currentOrders.length; i++) {
     for (var j = 0; j < renderedItems.length; j++) {
       if (currentOrders[i].id === renderedItems[j].artikelid) {
-        console.log("match")
-        console.log(currentOrders[i])
-        console.log(renderedItems[j])
         price =
           price +
           parseFloat(renderedItems[j].salePrice) *
@@ -131,7 +137,7 @@ function addItemAndRenderToScreen(itemID) {
 
 
 // SOME OLD FUNCTIONS WITH OLD DB
-// IGNORE
+// IGNORE. KEPT FOR REFENCE
 
 /*
 function renderOrders() {

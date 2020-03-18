@@ -7,45 +7,10 @@ var language = getLanguage();
 var moreInformation = false;
 const strongPercentage = 35;
 
-/*
-function mergeRenderedMenuItems(currentRendered, newToRender) {
-  if (currentRendered.length === 0) {
-    return newToRender;
-  } else {
-    console.log(currentRendered)
-    console.log(newToRender)
-    Array.prototype.push.apply(currentRendered, newToRender);
-    console.log(currentRendered)
-    switch (language) {
-      case "swedish":
-        for (var i = 0; i < currentRendered.length; i++) {
-          for (var j = i + 1; j < currentRendered.length; j++) {
-            if (
-              currentRendered[i].artikelid === currentRendered[j].artikelid &&
-              i !== j
-            ) {
-              currentRendered.splice(j--, 1);
-            }
-          }
-        }
-        break;
-      case "english":
-        for (var i = 0; i < currentRendered.length; i++) {
-          for (var j = i + 1; j < currentRendered.length; j++) {
-            if (
-              currentRendered[i].articleid === currentRendered[j].articleid &&
-              i !== j
-            ) {
-              currentRendered.splice(j--, 1);
-            }
-          }
-        }
-        break;
-    }
-    return currentRendered;
-  }
-}
-*/
+/**
+ * 
+ * Helper function that removes duplicates from the list of items in the menu
+ */
 
 function removeDuplicate() {
   for (var i = 0; i < currentlyRenderedItems.length; i++) {
@@ -65,34 +30,6 @@ function removeDuplicate() {
   }
 }
 
-/*
-for (var i = 0; i < mergedArray.length; i++) {
-      for (var j = i + 1; j < mergedArray.length; j++) {
-        if (mergedArray[i].artikelid === mergedArray[j].artikelid && i !== j) {
-          mergedArray.splice(j--, 1);
-        }
-      }
-    }
-
-*/
-
-/* function loadDB(language) {
-  switch (language) {
-    case "english":
-      $.getJSON("./../db/Beverages_eng.js", function(data) {
-        loadedDB = data;
-      });
-      break;
-    case "swedish":
-      $.getJSON(
-        "./../db/DBFilesJSON (not used, only for reference)/dutchman_table_sbl_beer.json",
-        function(data) {
-          loadedDB = data;
-        }
-      );
-      break;
-  }
-} */
 
 /**
  * This function creates a jquery object with a list of rendered items that we have in the temp (???) PubDB
@@ -112,23 +49,18 @@ function renderItemsToScreen(type) {
 
   var menuItems = $(); // Jquery object that we'll fill with spirits below
 
+  // Some old variables when we didn't have Shuangs DB.js
   var namePropertyName = "namn";
   var pricePropertyName = "prisinklmoms";
   var articleIdPropertyName = "artikelid";
   var moreInfoButtonText, orderButtonText, organic;
   switch (language) {
     case "english":
-      //namePropertyName = "name";
-      //pricePropertyName = "priceinclvat";
-      //articleIdPropertyName = "articleid";
       organic = "Organic";
       moreInfoButtonText = "More information";
       orderButtonText = "Order";
       break;
     case "swedish":
-      // namePropertyName = "namn";
-      // pricePropertyName = "prisinklmoms";
-      // articleIdPropertyName = "artikelid";
       organic = "Ekologisk";
       moreInfoButtonText = "Mer information";
       orderButtonText = "Beställ";
@@ -167,31 +99,30 @@ function renderItemsToScreen(type) {
         "</div>"
     );
   }
-  currentlyRenderedItems = currentlyRenderedItems.concat(beveragesToRender);
+  currentlyRenderedItems = currentlyRenderedItems.concat(beveragesToRender); // Keep a list of all rendered and previously rendered items
   removeDuplicate();
   $(".beverages-list ").append(menuItems); //Appends all the above created divs to our beverage list
 }
 
+/**
+ * Helper function to get the list of all rendered items
+ * Mainy needed for the order cart so we can keep items in it despite them not be rendered in the menu atm
+ */
 function getCurrentlyRenderedItems() {
   return currentlyRenderedItems;
 }
 
+/**
+ * Will look through the Stock DB to find those beverages with alc > some limit
+ * @param {int} percentage 
+ */
+
 function findStrongBeveregesToShow(percentage) {
   var objectAlcoholPercentageName = "alkoholhalt";
-  /* switch (language) {
-    case "english":
-      objectAlcoholPercentageName = "alcoholstrength";
-      break;
-    case "swedish":
-      objectAlcoholPercentageName = "alkoholhalt";
-      break;
-  } */
-
   var strongBeverages = [];
-  loadedDB = getDB();
+  loadedDB = getDB(); // The Systembolaget DB
   for (i = 0; i < loadedDB.length; i++) {
     if (parseFloat(loadedDB[i][objectAlcoholPercentageName]) >= percentage) {
-      //Finds spirits from the DB2 with the desired alcohol %
       strongBeverages.push(loadedDB[i]);
     }
   }
@@ -199,24 +130,13 @@ function findStrongBeveregesToShow(percentage) {
 }
 
 /**
- * PubDB is the temp (???) DB which stores what items the pub currently have in stock
- * This functions finds those items in the DB2 Lars gave us to get more info about them :)))))
+ * This functions finds those items in the Systembolaget DB from our Stock DB to get additional info from it
  * @param {string} type Which type of bev to look for
- * @param {array} listOfSpirits The array to search for
+ * @param {array} listOfSpirits The db to search in
  */
 function findBeveragesToShow(type, listOfSpirits) {
   var objectIDPropertyName = "artikelid";
   var objectCategoryPropertyName = "varugrupp";
-  /* switch (language) {
-    case "english":
-      objectIDPropertyName = "articleid";
-      objectCategoryPropertyName = "catgegory";
-      break;
-    case "swedish":
-      objectIDPropertyName = "artikelid";
-      objectCategoryPropertyName = "varugrupp";
-      break;
-  } */
   var beveragesToShow = [];
   if (type === "liquor") {
     for (i = 0; i < DB_STOCK.length; i++) {
@@ -225,7 +145,7 @@ function findBeveragesToShow(type, listOfSpirits) {
           DB_STOCK[i].article_id === listOfSpirits[j][objectIDPropertyName] &&
           DB_STOCK[i].in_stock > 0
         ) {
-          var itemToPush = {
+          var itemToPush = { // Creates an object with the info from DB_STOCK DB_STOXCK[i] and Systembolaget (listOfspirit[j]) that we need
             salePrice: DB_STOCK[i].sale_price,
             country: DB_STOCK[i].country,
             ...listOfSpirits[j]
@@ -236,19 +156,18 @@ function findBeveragesToShow(type, listOfSpirits) {
       }
     }
   }
+  // If time, find a better solution than this IF-statement.
   if (type === "other") {
     for (i = 0; i < DB_STOCK.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
         var spirit = listOfSpirits[j];
         if (DB_STOCK[i].article_id === spirit[objectIDPropertyName]) {
-          var spiritCategory = spirit[objectCategoryPropertyName];
-          // checks that "varugrupp" ("type of beverage") includes the ID of the clicked menu-tab
-          // I.e. if "beer" was clicked the ID is öl, then we look for those that include "öl" in their "varugrupp"
-
-          if (
+          var spiritCategory = spirit[objectCategoryPropertyName];  // The category of the current beverage
+          if ( // Checks that it's not Beer, wine or strong liquor. I.e, it only fits in "other"
             !spiritCategory.toLowerCase().includes("öl") &&
             !spiritCategory.toLowerCase().includes("vin") &&
-            parseFloat(spirit.alkoholhalt) < strongPercentage
+            parseFloat(spirit.alkoholhalt) < strongPercentage &&
+            DB_STOCK[i].in_stock > 0
           ) {
             var itemToPush = {
               salePrice: DB_STOCK[i].sale_price,
@@ -261,10 +180,14 @@ function findBeveragesToShow(type, listOfSpirits) {
       }
     }
   } else {
+    // Beer or wine
     for (i = 0; i < DB_STOCK.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
         var spirit = listOfSpirits[j];
-        if (DB_STOCK[i].article_id === spirit[objectIDPropertyName]) {
+        if (
+          DB_STOCK[i].article_id === spirit[objectIDPropertyName] &&
+          DB_STOCK[i].in_stock > 0
+        ) {
           var spiritCategory = spirit[objectCategoryPropertyName];
           // checks that "varugrupp" ("type of beverage") includes the ID of the clicked menu-tab
           // I.e. if "beer" was clicked the ID is öl, then we look for those that include "öl" in their "varugrupp"
@@ -296,13 +219,14 @@ function renderMoreInfoAboutItem(id) {
   var articleIdPropertyName = "artikelid";
   var kosherToDOM = "";
   var ecoToDOM = "";
-  var originText, producerText, closeButtonText, organic, kosher;
+  var originText, producerText, closeButtonText, organic, kosher, typeText;
+  // Multilingual functionality
   switch (language) {
     case "english":
       originPropertyName = "country";
-      // producerProperyName = "producer";
-      // articleIdPropertyName = "articleid";
+      typeText = "Type: ";
       originText = "Origin: ";
+      packagingText = "Packaging: ";
       organic = "Organic";
       kosher = "Kosher";
       producerText = "Producer: ";
@@ -310,9 +234,9 @@ function renderMoreInfoAboutItem(id) {
       break;
     case "swedish":
       originPropertyName = "ursprunglandnamn";
-      // producerProperyName = "producent";
-      //  articleIdPropertyName = "artikelid";
+      typeText = "Varugrupp: ";
       originText = "Ursprungsland: ";
+      packagingText = "Förpackning: ";
       kosher = "Kosher";
       organic = "Ekologisk";
       producerText = "Producent: ";
@@ -325,9 +249,20 @@ function renderMoreInfoAboutItem(id) {
       if (currentlyRenderedItems[i].koscher === "1") {
         kosherToDOM = "<t>" + kosher + "</t>";
       }
-
       if (currentlyRenderedItems[i].ekologisk === "1") {
         ecoToDOM = "<t>" + organic + "</t>";
+      }
+      // Since the DB only is in swedish I made some manual translation of the common types of packaging
+      if (getLanguage() === "english") {
+        switch (currentlyRenderedItems[i].forpackning) {
+          case "Flaska":
+            packagingText = packagingText + "Bottle";
+            break;
+          case "Burk":
+            packagingText = packagingText + "Can";
+        }
+      } else {
+        packagingText = packagingText + currentlyRenderedItems[i].forpackning;
       }
       // e.target.value is the id of the product that more info was requested about
       // Finds its object to get more info
@@ -341,12 +276,18 @@ function renderMoreInfoAboutItem(id) {
         producerText +
         currentlyRenderedItems[i][producerProperyName] +
         "</t>";
+
+      var type =
+        "<t>" + typeText + currentlyRenderedItems[i].varugrupp + " </t>";
+      var packaging = "<t>" + packagingText + "</t>";
       var closeButton =
         "<button id=close-button>" + closeButtonText + "</button>";
       moreInfo = moreInfo.add(
         "<div id=more-info-box>" +
           origin +
           producer +
+          type +
+          packaging +
           ecoToDOM +
           kosherToDOM +
           closeButton +
@@ -392,54 +333,10 @@ function menuItemDropped(e) {
 }
 
 /*         The way to access stuff despite language but was pretty slow:
-
+          (but it tought me quite a bit about JS objects so worth it anyhow)
 var entriesFromDbAtIndex = Object.entries(loadedDB[3]); // Returns an array containing all of the [key, value] pairs of a given object's own enumerable string properties.
         var temp = entriesFromDbAtIndex[10][1]; // [19] is the percentage entry and [1] extracts that number
         console.log(entriesFromDbAtIndex);
         console.log(temp); 
         
-        */
-
-/* MULTILANGUGE SUPPORT
-        function removeDuplicate() {
-  switch (language) {
-    case "swedish":
-      for (var i = 0; i < currentlyRenderedItems.length; i++) {
-        if (currentlyRenderedItems[i].artikelid === undefined) {
-          continue;
-        } else {
-          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
-            if (
-              currentlyRenderedItems[i].artikelid ===
-                currentlyRenderedItems[j].artikelid &&
-              i !== j
-            ) {
-              currentlyRenderedItems.splice(j--, 1);
-            }
-          }
-        }
-      }
-      break;
-    case "english":
-      for (var i = 0; i < currentlyRenderedItems.length; i++) {
-        if (currentlyRenderedItems[i].articleid === undefined) {
-          continue;
-        } else {
-          for (var j = i + 1; j < currentlyRenderedItems.length; j++) {
-            if (
-              currentlyRenderedItems[i].articleid ===
-                currentlyRenderedItems[j].articleid &&
-              i !== j
-            ) {
-              currentlyRenderedItems.splice(j--, 1);
-            }
-          }
-        }
-      }
-  }
-}
-
-
-
-
         */

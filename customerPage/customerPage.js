@@ -9,20 +9,15 @@ $(function() {
   db = DB_SYSTEMBOLAGET;
   console.log(db)
   console.log(DB_STOCK)
-  $(".login-page-container").hide();
-  // loadDB(language);
+  $(".login-page-container").hide(); // The container shouldn't be visible on load
   setLanguage();
-  $("#order-button").hide();
-  $(".order-cart-container").hide();
+  $(".order-cart-container").hide(); // Hides the order-cart on load since it should be empty then
   $(".language-button").on("click", function(e) {
     if (language !== e.target.id) {
       language = e.target.id;
-      setLanguage();
-      console.log("language: " + language);
-      //   loadDB(language);
-      upDatePrice();
-      console.log(currentlyRenderedType)
-      changeRenderedItems(currentlyRenderedType);
+      setLanguage(); // Function that updates the language of the page
+      upDatePrice(); // Updates the price to change language
+      changeRenderedItems(currentlyRenderedType); // Updates the rendered items for the new language
     }
   });
   /**
@@ -31,8 +26,8 @@ $(function() {
   $(".beverages-list li").on("click", function(e) {
     e.preventDefault();
     if (e.target.id === currentlyRenderedType) { // Pressed the same button
-      currentlyRenderedType = "";
-      $(".menuItem").remove();
+      currentlyRenderedType = ""; // Nothing should be rendered
+      $(".menuItem").remove(); // Removes all the rendered items from the DOM
       $(".beverages-list li").removeClass("active-li");
     } else {
       currentlyRenderedType = e.target.id;
@@ -43,37 +38,7 @@ $(function() {
   });
 });
 
-function validate() {
-  var uName = document.getElementById("uname").value;
-  var passwd = document.getElementById("passwd").value;
-  var myData = DB.users;
-  var userFound = false;
 
-  for (var i = 0; i < myData.length; i++) {
-    if (myData[i].username == uName && myData[i].password == passwd) {
-      userFound = true;
-    }
-  }
-  if (userFound) {
-    localStorage.setItem("loggedUser", uName);
-    document.location.href = "index.html";
-    console.log(document.location.href);
-  } else {
-    alert("Login failed for user '" + uName + "'...try again later!");
-  }
-}
-
-function openLogin(e) {
-  e.preventDefault();
-  $(".login-page-container").show();
-  $("#open-login-button").hide();
-}
-
-function closeForm(e) {
-  e.preventDefault();
-  $(".login-page-container").hide();
-  $("#open-login-button").show();
-}
 
 function changeRenderedItems(type) {
   if(type === ""){ // Bug handling, find out why this is needed
@@ -82,14 +47,10 @@ function changeRenderedItems(type) {
   // This calls the function in the menuAPI that selects which bevereges to show
   renderItemsToScreen(type);
 
-  /*
-  mergeRenderedMenuItemsArray = mergeRenderedMenuItems(
-    mergeRenderedMenuItemsArray,
-    getCurrentlyRenderedItems() // Helper function in the menuAPI that returns the currently rendered items
-  ); */
 
+  // Keeps track of all items that've been rendered 
   mergeRenderedMenuItemsArray = getCurrentlyRenderedItems();
-  console.log(mergeRenderedMenuItemsArray);
+
   /**
    * Someone clicked order-button
    */
@@ -100,8 +61,8 @@ function changeRenderedItems(type) {
 
   $(".more-info-button").on("click", function(e) {
     e.preventDefault();
-    if (getMoreInfoBoolValue === false) {
-      renderMoreInfoAboutItem(e.target.value);
+    if (getMoreInfoBoolValue === false) { // No more-information is rendered
+      renderMoreInfoAboutItem(e.target.value); // Calls the menu API to render more info about the item
     } else {
       $("#more-info-box").remove();
       renderMoreInfoAboutItem(e.target.value);
@@ -114,17 +75,22 @@ function getMergedRenderedMenuItemsArray() {
   return mergeRenderedMenuItemsArray;
 }
 
+// Helper function to get the currently selected language
 function getLanguage() {
   return language;
 }
 
+// Helper function to get the SYSTEMBOLAGET_DB that we loaded on page load
 function getDB() {
   return db;
 }
 
+
+// Sets the language of the page through string replacement
 function setLanguage() {
   switch (language) {
     case "english":
+      // Customer page
       $(".menu-header").text("Bevereges");
       $("#öl").text("Beer");
       $("#vin").text("Wine");
@@ -136,62 +102,37 @@ function setLanguage() {
       $("#text-on-picture").text("A family owned pub since 1904");
       $("#open-login-button").text("Press here to login");
       $("#close-login-form").text("Close login form");
+      // Login form
+      $("#uname").attr('placeholder', 'Enter username');
+      $("#passwd").attr('placeholder', 'Enter password');
+      $("#loginbox-login-button").attr('value', 'Login');
+      $("#login-box-header").text("Login here");
+      $("#login-box-username").text("Username");
+      $("#login-box-password").text("Password");
+      $("#lost-password").text("Lost your password?");
       break;
     case "swedish":
+      // Customer Page
       $(".menu-header").text("Drycker");
       $("#öl").text("Öl");
       $("#vin").text("Vin");
       $("#liquor").text("Sprit");
-      $("#other").text("Other spirits")
+      $("#other").text("Övriga drycker")
       $("#order-header").text("Varor");
       $("#order-button").text("Beställ");
       $("#price-box").text("Pris: ");
       $("#text-on-picture").text("En familjeägd pub sedan 1904");
       $("#open-login-button").text("Klicka här för att logga in");
       $("#close-login-form").text("Stäng ner");
+      // Login Form
+      $("#uname").attr('placeholder', 'Skriv in användarnamn');
+      $("#passwd").attr('placeholder', 'Skriv in lösenord');
+      $("#loginbox-login-button").attr('value', 'Logga in');
+      $("#login-box-header").text("Logga in här");
+      $("#login-box-username").text("Användarnamn");
+      $("#login-box-password").text("Lösenord");
+      $("#lost-password").text("Glömt lösenord?");
+
       break;
   }
 }
-
-/* 
-
-    // TEmp
-	$("#tempButton").on("click", function() {
-		console.log(PubDB.spirits);
-		for (i = 0; i < 20; i++) {
-			var randomNumber = Math.floor(Math.random() * DB2.spirits.length);
-			console.log(DB2.spirits[randomNumber].artikelid);
-		}
-	});
-
-// Temp function - fills the supply with something to test out stuff
-	$("#tempButton").on("click", function() {
-		console.log(PubDB.spirits);
-        var objectToPush = {
-            beverage_id: "",
-            stock: 0
-        }
-		for (i = 0; i < 20; i++) {
-			var randomNumber = Math.floor(Math.random() * DB2.spirits.length);
-			console.log(DB2.spirits[randomNumber].artikelid);
-			objectToPush = {
-                beverage_id: DB2.spirits[randomNumber].artikelid,
-                stock: 1
-            } 
-            console.log(objectToPush)
-            for(j = 0; j < PubDB.spirits.length; j++) {
-                var itemInPubDB = PubDB.spirits[j]
-                if(PubDB.spirits[j].beverage_id === objectToPush.beverage_id) {
-                    PubDB.spirits[j] = {
-                        beverage_id: itemInPubDB.beverage_id,
-                        stock: itemInPubDB.stock + 1
-                    }
-                }
-                else {
-                    PubDB.spirits.push(objectToPush)
-                }
-            }
-        }
-    });
-    
-    */
