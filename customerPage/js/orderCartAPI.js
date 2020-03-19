@@ -1,17 +1,17 @@
 var currentOrders = []; // Temp way to see which orders the user currently have in their basket, should be in a DB in the future??
 var renderedItems = [];
 
-
 /**
  * Function to add item to cart
- * @param {string} itemID 
+ * @param {string} itemID
  */
 function addItem(itemID) {
   $(".order-cart-container").show(); // The cart should be shown now that it's >0 items in it
   // We have orders
   if (currentOrders.length > 0) {
     for (i = 0; i < currentOrders.length; i++) {
-      if (itemID === currentOrders[i].id) {         // Checks if the added item already exists
+      if (itemID === currentOrders[i].id) {
+        // Checks if the added item already exists
         newQuant = currentOrders[i].quantity + 1;
         currentOrders[i].quantity = newQuant; // Then we just increase its quant and doesn't make a new entry
         renderOrders();
@@ -38,17 +38,19 @@ function emptyOrderCart() {
 }
 /**
  * Removes an item from the cart
- * @param {string} itemID 
+ * @param {string} itemID
  */
 
 function removeItem(itemID) {
-  for (var i = 0; i < currentOrders.length; i++) { 
-    if (itemID === currentOrders[i].id) { // Found the item in currentOrders
-      if (currentOrders[i].quantity > 1) { 
+  for (var i = 0; i < currentOrders.length; i++) {
+    if (itemID === currentOrders[i].id) {
+      // Found the item in currentOrders
+      if (currentOrders[i].quantity > 1) {
         // Just change the quantity
         var newQuant = currentOrders[i].quantity - 1;
-        currentOrders[i].quantity = newQuant; 
-      } else { // SHould be removed
+        currentOrders[i].quantity = newQuant;
+      } else {
+        // SHould be removed
         currentOrders.splice(i, 1);
         if (currentOrders.length === 0) {
           emptyOrderCart(); // No orders are left
@@ -64,8 +66,24 @@ function removeItem(itemID) {
  */
 
 function orderButtonClicked() {
+  var price = getPriceOfOrder(); // This should be added to a saldo
+  var str = "";
+  for (var i = 0; i < currentOrders.length; i++) { // This for loop now just creates a string, but it should add orders for the bartender to see
+    str =
+      str +
+      " " +
+      currentOrders[i].quantity +
+      " of the artikelid: " +
+      currentOrders[i].id;
+  }
   emptyOrderCart();
-  alert("This needs to integrate with the bartender etc");
+  alert(
+    "The customer ordered: " +
+      str +
+      " to a price of: " +
+      price +
+      "\n This needs to integrate with the bartender etc"
+  );
 }
 
 /**
@@ -132,9 +150,6 @@ function addItemAndRenderToScreen(itemID) {
   addItem(itemID);
   renderOrders();
 }
-
-
-
 
 // SOME OLD FUNCTIONS WITH OLD DB
 // IGNORE. KEPT FOR REFENCE

@@ -37,13 +37,6 @@
         Open Login Form
       </button>
       <div class="footer-div">
-        <!-- Just temp for test to see if it would work
-          <p>Or continue as a guest by choosing table:</p>
-          <form id="table-form" onsubmit="{tableChosen(event)}">
-            <input type="text" id="table-number" name="table-number" />
-            <input type="submit" value="continue" />
-          </form>
-          -->
       </div>
     </header>
     <div class="page-container">
@@ -60,6 +53,11 @@
       <div class="login-page-container">
         <div class="loginbox">
           <!--           <img src="avatar.png" class="avatar" /> -->
+          <div id="login-form-buttons">
+            <button id="bartender" class="login-role-button">Bartender</button>
+            <button id="vip-customer" class="login-role-button">VIP-customer</button>
+            <button id="manager" class="login-role-button">Manager</button>
+          </div>
           <h1 id="login-box-header">Login Here</h1>
           <form id="login-form" action="javascript:validate();" method="post">
             <p id="login-box-username">Username</p>

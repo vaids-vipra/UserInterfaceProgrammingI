@@ -16,6 +16,8 @@ body{
     flex-direction: column;
 }
 .loginbox{
+    display: flex;
+    flex-direction: column;
     z-index: 10;
     position: absolute;
     background: #000000;
@@ -29,7 +31,6 @@ body{
     box-sizing: border-box;
     padding: 70px 30px;
     align-self: center;
-    margin-left: 30px;
     padding-bottom: 90px;
 }
 
@@ -40,6 +41,23 @@ body{
     /* position: absolute; */
     /* top: -50px;
     left: calc(50% - 50px); */
+}
+
+#login-form-buttons {
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+#login-form-buttons button {
+    text-decoration: none;
+    border: none;
+    background: darkgoldenrod;
+    border-radius: 17px;
+}
+
+.active-login-button {
+    background: rgb(219, 158, 4) !important;
+    font-size: 16px;
 }
 
 h1{
@@ -107,10 +125,15 @@ h1{
 
 #close-login-form {
     background: red;
+    color: lightgrey;
     border: 2px black solid;
     align-self: flex-end;
     padding: 4px;
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+}
+
+#close-login-form:hover {
+    background: #ffc107;
 }

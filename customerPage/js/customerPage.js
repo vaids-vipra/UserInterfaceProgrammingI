@@ -7,8 +7,8 @@ var currentlyRenderedType = "";
 
 $(function() {
   db = DB_SYSTEMBOLAGET;
-  console.log(db)
-  console.log(DB_STOCK)
+  console.log(db);
+  console.log(DB_STOCK);
   $(".login-page-container").hide(); // The container shouldn't be visible on load
   setLanguage();
   $(".order-cart-container").hide(); // Hides the order-cart on load since it should be empty then
@@ -25,7 +25,8 @@ $(function() {
    */
   $(".beverages-list li").on("click", function(e) {
     e.preventDefault();
-    if (e.target.id === currentlyRenderedType) { // Pressed the same button
+    if (e.target.id === currentlyRenderedType) {
+      // Pressed the same button
       currentlyRenderedType = ""; // Nothing should be rendered
       $(".menuItem").remove(); // Removes all the rendered items from the DOM
       $(".beverages-list li").removeClass("active-li");
@@ -33,22 +34,20 @@ $(function() {
       currentlyRenderedType = e.target.id;
       changeRenderedItems(e.target.id);
       $(".beverages-list li").removeClass("active-li");
-      $(".beverages-list li" + "#" + e.target.id).toggleClass("active-li");  
+      $(".beverages-list li" + "#" + e.target.id).toggleClass("active-li");
     }
   });
 });
 
-
-
 function changeRenderedItems(type) {
-  if(type === ""){ // Bug handling, find out why this is needed
+  if (type === "") {
+    // Bug handling, find out why this is needed
     return;
   }
   // This calls the function in the menuAPI that selects which bevereges to show
   renderItemsToScreen(type);
 
-
-  // Keeps track of all items that've been rendered 
+  // Keeps track of all items that've been rendered
   mergeRenderedMenuItemsArray = getCurrentlyRenderedItems();
 
   /**
@@ -61,7 +60,8 @@ function changeRenderedItems(type) {
 
   $(".more-info-button").on("click", function(e) {
     e.preventDefault();
-    if (getMoreInfoBoolValue === false) { // No more-information is rendered
+    if (getMoreInfoBoolValue === false) {
+      // No more-information is rendered
       renderMoreInfoAboutItem(e.target.value); // Calls the menu API to render more info about the item
     } else {
       $("#more-info-box").remove();
@@ -85,7 +85,6 @@ function getDB() {
   return db;
 }
 
-
 // Sets the language of the page through string replacement
 function setLanguage() {
   switch (language) {
@@ -95,7 +94,7 @@ function setLanguage() {
       $("#öl").text("Beer");
       $("#vin").text("Wine");
       $("#liquor").text("Liquor");
-      $("#other").text("Other spirits")
+      $("#other").text("Other spirits");
       $("#order-header").text("Items in cart");
       $("#order-button").text("Order");
       $("#price-box").text("Price: ");
@@ -103,9 +102,9 @@ function setLanguage() {
       $("#open-login-button").text("Press here to login");
       $("#close-login-form").text("Close login form");
       // Login form
-      $("#uname").attr('placeholder', 'Enter username');
-      $("#passwd").attr('placeholder', 'Enter password');
-      $("#loginbox-login-button").attr('value', 'Login');
+      $("#uname").attr("placeholder", "Enter username");
+      $("#passwd").attr("placeholder", "Enter password");
+      $("#loginbox-login-button").attr("value", "Login");
       $("#login-box-header").text("Login here");
       $("#login-box-username").text("Username");
       $("#login-box-password").text("Password");
@@ -117,7 +116,7 @@ function setLanguage() {
       $("#öl").text("Öl");
       $("#vin").text("Vin");
       $("#liquor").text("Sprit");
-      $("#other").text("Övriga drycker")
+      $("#other").text("Övriga drycker");
       $("#order-header").text("Varor");
       $("#order-button").text("Beställ");
       $("#price-box").text("Pris: ");
@@ -125,9 +124,9 @@ function setLanguage() {
       $("#open-login-button").text("Klicka här för att logga in");
       $("#close-login-form").text("Stäng ner");
       // Login Form
-      $("#uname").attr('placeholder', 'Skriv in användarnamn');
-      $("#passwd").attr('placeholder', 'Skriv in lösenord');
-      $("#loginbox-login-button").attr('value', 'Logga in');
+      $("#uname").attr("placeholder", "Skriv in användarnamn");
+      $("#passwd").attr("placeholder", "Skriv in lösenord");
+      $("#loginbox-login-button").attr("value", "Logga in");
       $("#login-box-header").text("Logga in här");
       $("#login-box-username").text("Användarnamn");
       $("#login-box-password").text("Lösenord");

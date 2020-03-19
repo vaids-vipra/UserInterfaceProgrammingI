@@ -101,6 +101,7 @@ function renderItemsToScreen(type) {
   }
   currentlyRenderedItems = currentlyRenderedItems.concat(beveragesToRender); // Keep a list of all rendered and previously rendered items
   removeDuplicate();
+  console.log(currentlyRenderedItems)
   $(".beverages-list ").append(menuItems); //Appends all the above created divs to our beverage list
 }
 
@@ -150,7 +151,6 @@ function findBeveragesToShow(type, listOfSpirits) {
             country: DB_STOCK[i].country,
             ...listOfSpirits[j]
           };
-          console.log(itemToPush);
           beveragesToShow.push(itemToPush);
         }
       }
@@ -204,7 +204,6 @@ function findBeveragesToShow(type, listOfSpirits) {
       }
     }
   }
-  console.log(beveragesToShow);
   return beveragesToShow;
 }
 
