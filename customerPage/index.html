@@ -5,6 +5,8 @@
     <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
     <link rel="stylesheet" type="text/css" href="./../style-loginpage.css" />
     <link rel="import" href="./../backend//index.html" />
+    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Oswald" rel="stylesheet">
+
     <meta charset="utf-8" />
     <title>CustomerPage</title>
     <meta name="description" content="The HTML5 Herald" />
@@ -33,7 +35,7 @@
         />
       </button>
       <!--Swedish-->
-      <button id="open-login-button" onClick="openLogin(event)">
+      <button id="open-login-button">
         Open Login Form
       </button>
       <div class="footer-div">
@@ -59,7 +61,7 @@
             <button id="manager" class="login-role-button">Manager</button>
           </div>
           <h1 id="login-box-header">Login Here</h1>
-          <form id="login-form" action="javascript:validate();" method="post">
+          <form id="login-form" >
             <p id="login-box-username">Username</p>
             <input
               type="text"
@@ -81,7 +83,7 @@
             <input type="submit" value="Login" id="loginbox-login-button" />
             <a href="#" id="lost-password">Lost your password?</a><br />
           </form>
-          <button id="close-login-form" onclick="closeForm(event)">
+          <button id="close-login-form">
             Close login form
           </button>
         </div>
@@ -122,8 +124,8 @@
       <img src="./../db/images/Beer+Taps+Web.jpg" />
     </div> -->
   </body>
-  <script></script>
-  <script src="./js/customerPage.js"></script>
+<!--   <script src="./js/view/view_customerPage.js"></script>
+ -->  <script src="./js/customerPage.js"></script>
   <script src="./js/menuAPI.js"></script>
   <script src="./js/orderCartAPI.js"></script>
   <script type="text/javascript" src="./../db/Beverages.js"></script>

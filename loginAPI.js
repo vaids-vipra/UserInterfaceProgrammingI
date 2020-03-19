@@ -11,9 +11,17 @@ mauro123
 */
 
 /** Ask V for comments */
+$("#login-form").submit(function(e) {
+  e.preventDefault();
+  validate();
+});
 function validate() {
   if (loginRole === "") {
-    alert("No Role Selected");
+    if (getLanguage() === "english") {
+      alert("No Role Selected");
+    } else {
+      alert("Välj roll!")
+    }
   } else {
     var uName = document.getElementById("uname").value;
     var passwd = document.getElementById("passwd").value;
@@ -33,7 +41,13 @@ function validate() {
       window.location.href = targetPage;
       console.log(document.location.href);
     } else {
-      alert("Login failed for user '" + uName + "'...try again later!");
+      if (getLanguage() === "english") {
+        alert("Login failed for user '" + uName + "'...try again later!");
+      } else {
+        alert(
+          "Inloggning misslyckades för '" + uName + "'...försök igen senare!"
+        );
+      }
     }
   }
 }
@@ -73,21 +87,21 @@ $(".login-role-button").click(function(e) {
       break;
     case "manager":
       targetPage = window.location.origin + "/Management/management.html";
-      console.log(targetPage)
+      console.log(targetPage);
       accountDB = DB_MANAGERS;
       console.log(accountDB);
       break;
   }
 });
 
-function openLogin(e) {
+$("#open-login-button").click(function(e) {
   e.preventDefault();
   $(".login-page-container").show();
   $("#open-login-button").hide();
-}
+});
 
-function closeForm(e) {
+$("#close-login-form").click(function(e) {
   e.preventDefault();
   $(".login-page-container").hide();
   $("#open-login-button").show();
-}
+});

@@ -86,6 +86,7 @@ function getDB() {
 }
 
 // Sets the language of the page through string replacement
+
 function setLanguage() {
   switch (language) {
     case "english":
@@ -102,6 +103,7 @@ function setLanguage() {
       $("#open-login-button").text("Press here to login");
       $("#close-login-form").text("Close login form");
       // Login form
+      $("#vip-customer").text("VIP-customer");
       $("#uname").attr("placeholder", "Enter username");
       $("#passwd").attr("placeholder", "Enter password");
       $("#loginbox-login-button").attr("value", "Login");
@@ -124,6 +126,7 @@ function setLanguage() {
       $("#open-login-button").text("Klicka här för att logga in");
       $("#close-login-form").text("Stäng ner");
       // Login Form
+      $("#vip-customer").text("VIP-kund");
       $("#uname").attr("placeholder", "Skriv in användarnamn");
       $("#passwd").attr("placeholder", "Skriv in lösenord");
       $("#loginbox-login-button").attr("value", "Logga in");
@@ -131,7 +134,6 @@ function setLanguage() {
       $("#login-box-username").text("Användarnamn");
       $("#login-box-password").text("Lösenord");
       $("#lost-password").text("Glömt lösenord?");
-
       break;
   }
 }

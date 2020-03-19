@@ -10,6 +10,7 @@ SUPERB explanation on position: https://stackoverflow.com/questions/2941189/how-
 html,
 body {
   height: 100%;
+  font-family: 'Oswald', sans-serif;
 }
 
 .customer-page-header {
@@ -25,15 +26,16 @@ body {
 }
 
 #open-login-button {
-  background: #3e8db3;
+  background: #567973;
   font-size: 16px;
   border-radius: 17px;
+  padding: 6px;
 }
 
 .page-container {
   /*   background: url("./../db/images/Beer+Taps+Web.jpg");
  */
-  background-color: snow;
+  background-color: rgba(255, 255, 255, 0.9);
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
@@ -43,11 +45,8 @@ body {
 }
 
 .menu-tabs {
-  background-color: snow;
+  background-color: rgba(255, 255, 255, 0.9);
   flex-grow: 1;
-}
-
-.beverages-list {
 }
 
 .menu-tabs header {
@@ -57,9 +56,9 @@ body {
 .order-cart-container {
   margin-left: auto;
   justify-self: flex-end;
-  border: 2px black solid;
+  border: 2px darkgreen solid;
   text-align: center;
-  background: snow;
+  background: rgba(255, 255, 255, 0.9);
   margin-right: 5px;
 }
 .order-cart-container ul {
@@ -73,11 +72,12 @@ body {
 .menu-tabs ul li {
   margin: 5px;
   list-style-type: none;
+  border: darkgreen;
   display: inline-block;
-  background: #3e8db3;
+  background: #567973;
   font-size: 22px;
   padding: 6px 15px;
-  border-radius: 50%;
+  border-radius: 17px;
   color: #383838;
 }
 
@@ -85,11 +85,12 @@ body {
   font-size: 26px !important;
 }
 .menuItem {
-  background: #f5f5f5;
-  border: 1px black solid;
+  background: #A4B9B6;
+  border: 1px darkgreen solid;
   width: 50%;
-  padding: 5px;
-  border-radius: 10%;
+  padding: 7px;
+  border-radius: 3%;
+  margin-top: 3px;
   /*   display: flex;
   flex-direction: row;
  */
@@ -194,6 +195,8 @@ body {
 }
 
 .image-container h2 {
+  color: #21312e;
+  font-weight: bold;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -202,7 +205,10 @@ body {
 }
 
 .image-container t {
+  color: #21312e;
   position: absolute;
+  font-weight: bold;
+  font-size: 20px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
