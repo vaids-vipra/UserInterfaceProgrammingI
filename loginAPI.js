@@ -48,6 +48,7 @@ $(".login-role-button").click(function(e) {
     loginRole = "";
     targetPage = "";
   } else {
+    $(".login-role-button").removeClass("active-login-button");
     $("#" + e.target.id).toggleClass("active-login-button");
     loginRole = e.target.id;
   }
@@ -55,7 +56,7 @@ $(".login-role-button").click(function(e) {
   console.log(e.target.id);
   switch (e.target.id) {
     case "bartender":
-      targetPage = document.location.href; //SET THIS TO THE BARTENDER PAGE
+      targetPage = document.location.href; // window.location.origin + "/BARTENDERPAGE.html";
       accountDB = DB_BARTENDERS;
       console.log(accountDB);
       break;
