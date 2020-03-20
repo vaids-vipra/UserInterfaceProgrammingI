@@ -105,3 +105,8 @@ $("#close-login-form").click(function(e) {
   $(".login-page-container").hide();
   $("#open-login-button").show();
 });
+
+function logOut() { 
+    localStorage.clear();
+    window.location.href = "/customerPage/index.html";
+}
