@@ -322,7 +322,6 @@ function updateTotal (){
 };
 
 function formatDate (date) {
-    /* Returns formatted date as follows: "2018-03-19 21:00:00" */
     var formatted_date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-"
         + date.getDate() +" "+ date.getHours() +":"+ date.getMinutes()+ ":" + date.getSeconds();
     return formatted_date;
