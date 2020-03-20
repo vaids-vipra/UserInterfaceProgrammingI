@@ -14,7 +14,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "8.0%"
     },
-    
+
     {
         "artikelid": "MIKE02",
         "namn": "Taranaki IPA",
@@ -28,7 +28,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "7.0%"
      },
-     
+
      {
         "artikelid": "MIKE03",
         "namn": "Vanilla Coffee Porter",
@@ -43,7 +43,7 @@ var DB_MIKES = [
         "alkoholhalt": "8.0%"
      },
     {
-        "artikelid": "MIKEit04",
+        "artikelid": "MIKE04",
         "namn": "Chocolate Milk Stout",
         "namn2": "",
         "year": 2018,
@@ -55,7 +55,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "8.0%"
      },
-        
+
      {
         "artikelid": "MIKE05",
         "namn": "Onemorepaleale",
@@ -82,7 +82,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "5.0%"
      },
-    
+
     {
         "artikelid": "MIKE07",
         "namn": "Longline Lager",
@@ -96,7 +96,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "5.0%"
      },
-    
+
      {
         "artikelid": "MIKE08",
         "namn": "Mild Ale",
@@ -110,7 +110,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "4.0%"
      },
-    
+
      {
         "artikelid": "MIKE09",
         "namn": "Full Nelson IPA",
@@ -124,7 +124,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "7.0%"
      },
-    
+
      {
         "artikelid": "MIKE10",
         "namn": "Second Coming IIPA",
@@ -138,8 +138,8 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "9.0%"
      },
-     
-    
+
+
       {
         "artikelid": "MIKE11",
         "namn": "Surf Spot X",
@@ -153,7 +153,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "5.7%"
      },
-    
+
     {
         "artikelid": "MIKE12",
         "namn": "Boys N Girls",
@@ -167,7 +167,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "8.0%"
      },
-    
+
      {
         "artikelid": "MIKE13",
         "namn": "Hopstock & 2 Smoking Barrels",
@@ -181,7 +181,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "5.0%"
      },
-    
+
     {
         "artikelid": "MIKE14",
         "namn": "Damson in Distress",
@@ -195,7 +195,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "5.0%"
      },
-    
+
     {
         "artikelid": "MIKE15",
         "namn": "Flight of the Falcon",
@@ -209,7 +209,7 @@ var DB_MIKES = [
         "leverantor": "Kiwi Couriers AB",
         "alkoholhalt": "5.7%"
      },
-    
+
      {
          "artikelid": "MIKE16",
         "namn": "Leaky Boat",

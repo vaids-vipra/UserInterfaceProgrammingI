@@ -8,7 +8,7 @@ var moreInformation = false;
 const strongPercentage = 35;
 
 /**
- * 
+ *
  * Helper function that removes duplicates from the list of items in the menu
  */
 
@@ -29,7 +29,6 @@ function removeDuplicate() {
     }
   }
 }
-
 
 /**
  * This function creates a jquery object with a list of rendered items that we have in the temp (???) PubDB
@@ -66,6 +65,8 @@ function renderItemsToScreen(type) {
       orderButtonText = "Beställ";
   }
 
+  console.log(beveragesToRender);
+
   /**
    * This for loop creates a div for every item that we're gonna render
    * Adds it to the menuItem jquery object
@@ -101,7 +102,7 @@ function renderItemsToScreen(type) {
   }
   currentlyRenderedItems = currentlyRenderedItems.concat(beveragesToRender); // Keep a list of all rendered and previously rendered items
   removeDuplicate();
-  console.log(currentlyRenderedItems)
+  console.log(currentlyRenderedItems);
   $(".beverages-list ").append(menuItems); //Appends all the above created divs to our beverage list
 }
 
@@ -115,7 +116,7 @@ function getCurrentlyRenderedItems() {
 
 /**
  * Will look through the Stock DB to find those beverages with alc > some limit
- * @param {int} percentage 
+ * @param {int} percentage
  */
 
 function findStrongBeveregesToShow(percentage) {
@@ -136,6 +137,7 @@ function findStrongBeveregesToShow(percentage) {
  * @param {array} listOfSpirits The db to search in
  */
 function findBeveragesToShow(type, listOfSpirits) {
+  console.log(type);
   var objectIDPropertyName = "artikelid";
   var objectCategoryPropertyName = "varugrupp";
   var beveragesToShow = [];
@@ -146,7 +148,8 @@ function findBeveragesToShow(type, listOfSpirits) {
           DB_STOCK[i].article_id === listOfSpirits[j][objectIDPropertyName] &&
           DB_STOCK[i].in_stock > 0
         ) {
-          var itemToPush = { // Creates an object with the info from DB_STOCK DB_STOXCK[i] and Systembolaget (listOfspirit[j]) that we need
+          var itemToPush = {
+            // Creates an object with the info from DB_STOCK DB_STOXCK[i] and Systembolaget (listOfspirit[j]) that we need
             salePrice: DB_STOCK[i].sale_price,
             country: DB_STOCK[i].country,
             ...listOfSpirits[j]
@@ -162,10 +165,12 @@ function findBeveragesToShow(type, listOfSpirits) {
       for (j = 0; j < listOfSpirits.length; j++) {
         var spirit = listOfSpirits[j];
         if (DB_STOCK[i].article_id === spirit[objectIDPropertyName]) {
-          var spiritCategory = spirit[objectCategoryPropertyName];  // The category of the current beverage
-          if ( // Checks that it's not Beer, wine or strong liquor. I.e, it only fits in "other"
+          var spiritCategory = spirit[objectCategoryPropertyName]; // The category of the current beverage
+          if (
+            // Checks that it's not Beer, wine or strong liquor. I.e, it only fits in "other"
             !spiritCategory.toLowerCase().includes("öl") &&
             !spiritCategory.toLowerCase().includes("vin") &&
+            !spiritCategory.toLowerCase().includes("MIKE") &&
             parseFloat(spirit.alkoholhalt) < strongPercentage &&
             DB_STOCK[i].in_stock > 0
           ) {
@@ -177,6 +182,17 @@ function findBeveragesToShow(type, listOfSpirits) {
             beveragesToShow.push(itemToPush);
           }
         }
+      }
+    }
+  }
+  if (type === "special") {
+    console.log("spec");
+    // Special drinks aren't included in the Systembolaget DB
+    for (i = 0; i < DB_STOCK.length; i++) {
+      var specialStockID = DB_STOCK[i].article_id.toLowerCase();
+      if (specialStockID.includes("mike")) {
+        var specialDrinkToRender = renderSpecialDrink(DB_STOCK[i]);
+        beveragesToShow.push(specialDrinkToRender);
       }
     }
   } else {
@@ -298,6 +314,20 @@ function renderMoreInfoAboutItem(id) {
   $("#close-button").on("click", function() {
     $("#more-info-box").remove();
   });
+}
+
+function renderSpecialDrink(drink) {
+  var mikeDB = DB_MIKES;
+  for (var i = 0; i < mikeDB.length; i++) {
+    if (drink.article_id === mikeDB[i].artikelid) {
+      var item = {
+        salePrice: drink.sale_price,
+        country: drink.country,
+        ...mikeDB[i]
+      };
+    }
+  }
+  return item;
 }
 
 function getMoreInfoBoolValue() {

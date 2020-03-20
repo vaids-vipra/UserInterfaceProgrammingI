@@ -1,42 +1,62 @@
 //Beer Ã–l
-var mergeRenderedMenuItemsArray = []; // This variable stores all the items we have rendered in the menu for the order-cart
 var language = "swedish"; // Default language
 var db = [];
 var moreInformation = false;
 var currentlyRenderedType = "";
 
+/**
+ * TEST VIP
+ * username: dansch
+ * pw: 9b0c08c58fdeb1b25525ac0cb8187eda
+ */
+
 $(function() {
-  db = DB_SYSTEMBOLAGET;
-  console.log(db);
-  console.log(DB_STOCK);
-  $(".login-page-container").hide(); // The container shouldn't be visible on load
-  setLanguage();
-  $(".order-cart-container").hide(); // Hides the order-cart on load since it should be empty then
-  $(".language-button").on("click", function(e) {
-    if (language !== e.target.id) {
-      language = e.target.id;
-      setLanguage(); // Function that updates the language of the page
-      upDatePrice(); // Updates the price to change language
-      changeRenderedItems(currentlyRenderedType); // Updates the rendered items for the new language
+    var user = JSON.parse(localStorage.getItem("loggedUser")); // Gets the locally stored user
+    if(user.vip !== undefined) { // Got weird errors without this
+      if(user.vip === true) { // Checks in the user object if it's a VIP-customer
+        $("#special").show();      
+      }
     }
-  });
-  /**
-   * When a menu-"header" (i.e. beer) is clicked
-   */
-  $(".beverages-list li").on("click", function(e) {
-    e.preventDefault();
-    if (e.target.id === currentlyRenderedType) {
-      // Pressed the same button
-      currentlyRenderedType = ""; // Nothing should be rendered
-      $(".menuItem").remove(); // Removes all the rendered items from the DOM
-      $(".beverages-list li").removeClass("active-li");
-    } else {
-      currentlyRenderedType = e.target.id;
-      changeRenderedItems(e.target.id);
-      $(".beverages-list li").removeClass("active-li");
-      $(".beverages-list li" + "#" + e.target.id).toggleClass("active-li");
-    }
-  });
+    else {
+    $(".beverages-list li#special").hide();
+  }
+    db = DB_SYSTEMBOLAGET;
+    console.log(db);
+    console.log(DB_STOCK);
+    $(".login-page-container").hide(); // The container shouldn't be visible on load
+    setLanguage();
+    $(".order-cart-container").hide(); // Hides the order-cart on load since it should be empty then
+
+});
+/**
+ * Language button is clicked
+ */
+
+$(".language-button").on("click", function(e) {
+  if (language !== e.target.id) {
+    language = e.target.id;
+    setLanguage(); // Function that updates the language of the page
+    upDatePrice(); // Updates the price to change language
+    changeRenderedItems(currentlyRenderedType); // Updates the rendered items for the new language
+  }
+});
+
+/**
+* When a menu-"header" (i.e. beer) is clicked
+ */
+$(".beverages-list li").on("click", function(e) {
+  e.preventDefault();
+  if (e.target.id === currentlyRenderedType) {
+    // Pressed the same button
+    currentlyRenderedType = ""; // Nothing should be rendered
+    $(".menuItem").remove(); // Removes all the rendered items from the DOM
+    $(".beverages-list li").removeClass("active-li");
+  } else {
+    currentlyRenderedType = e.target.id;
+    changeRenderedItems(e.target.id);
+    $(".beverages-list li").removeClass("active-li");
+    $(".beverages-list li" + "#" + e.target.id).toggleClass("active-li");
+  }
 });
 
 function changeRenderedItems(type) {
@@ -48,8 +68,6 @@ function changeRenderedItems(type) {
   renderItemsToScreen(type);
 
   // Keeps track of all items that've been rendered
-  mergeRenderedMenuItemsArray = getCurrentlyRenderedItems();
-
   /**
    * Someone clicked order-button
    */
@@ -91,10 +109,11 @@ function setLanguage() {
   switch (language) {
     case "english":
       // Customer page
-      $(".menu-header").text("Bevereges");
+      $(".menu-header").text("Drink menu");
       $("#öl").text("Beer");
       $("#vin").text("Wine");
       $("#liquor").text("Liquor");
+      $("#special").text("Special drinks");
       $("#other").text("Other spirits");
       $("#order-header").text("Items in cart");
       $("#order-button").text("Order");
@@ -114,10 +133,11 @@ function setLanguage() {
       break;
     case "swedish":
       // Customer Page
-      $(".menu-header").text("Drycker");
+      $(".menu-header").text("Dryckesmeny");
       $("#öl").text("Öl");
       $("#vin").text("Vin");
       $("#liquor").text("Sprit");
+      $("#special").text("Unika drinkar");
       $("#other").text("Övriga drycker");
       $("#order-header").text("Varor");
       $("#order-button").text("Beställ");

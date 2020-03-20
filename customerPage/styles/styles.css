@@ -13,7 +13,9 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-.customer-page-header {
+.menu-header {
+  font-size: 30px;
+  margin-top: 0px;
 }
 
 .language-button {
@@ -29,9 +31,12 @@ body {
   background: #567973;
   font-size: 16px;
   border-radius: 17px;
-  padding: 6px;
+  padding: 10px;
 }
 
+#open-login-button:hover {
+  background-color: #D6DDDC;
+}
 .page-container {
   /*   background: url("./../db/images/Beer+Taps+Web.jpg");
  */
@@ -54,6 +59,7 @@ body {
 }
 
 .order-cart-container {
+  margin-top: 16px;
   margin-left: auto;
   justify-self: flex-end;
   border: 2px darkgreen solid;
@@ -81,6 +87,10 @@ body {
   color: #383838;
 }
 
+.menu-tabs ul li:hover {
+  background-color: #D6DDDC;
+}
+
 .active-li {
   font-size: 26px !important;
 }
@@ -95,14 +105,14 @@ body {
   flex-direction: row;
  */
 }
+.menuItem:hover {
+  background-color: #D6DDDC;
+
+}
 .menuItem t {
   color: black;
 }
 
-#more-info-box {
-  display: flex;
-  flex-direction: column;
-}
 
 .order-item {
   margin-bottom: 5px;
@@ -116,6 +126,10 @@ body {
   border-radius: 17px;
   box-shadow: 1px 2px 1.5px darkgreen;
   margin-left: 5px;
+}
+
+.order-menu-button:hover {
+  background-color: rgb(50, 202, 50);
 }
 
 .order-menu-button:active {
@@ -132,11 +146,20 @@ body {
   margin-right: 3px;
 }
 
+.more-info-button:hover {
+  background-color: #85C1E9;
+}
+
 #more-info-box {
   margin-top: 5px;
   display: flex;
   flex-direction: column;
 }
+
+#more-info-box:hover {
+  background-color: #D6DDDC;
+}
+
 
 #more-info-box t {
   font-size: 18px;
@@ -152,6 +175,10 @@ body {
   align-self: center;
 }
 
+#close-button:hover {
+  background-color: grey;
+}
+
 .plus-button {
   background: lightgreen;
   margin-left: 5px;
@@ -159,10 +186,18 @@ body {
   text-decoration: none;
 }
 
+.plus-button:hover {
+  background-color: rgb(50, 202, 50);
+}
+
 .minus-button {
   background: lightgrey;
   border: 1px black solid;
   margin-right: 5px;
+}
+
+.minus-button:hover {
+  background-color: grey;
 }
 
 #payment-form {
@@ -179,6 +214,11 @@ body {
   border-radius: 17px;
   margin-bottom: 5px;
   /* box-shadow: 1px 2px 1.5px darkorange; */
+}
+
+#order-button:active,
+#order-button:hover {
+  background: darkorange;
 }
 
 .image-container {
