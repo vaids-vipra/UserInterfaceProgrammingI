@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
-    <link rel="stylesheet" type="text/css" href="./../style-loginpage.css" />
+    <link rel="stylesheet" type="text/css" href="./../login-box/style-loginpage.css" />
     <link rel="import" href="./../backend//index.html" />
     <link
       href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Oswald"
@@ -44,8 +44,8 @@
       <button class="login-logout-button" id="customer-page-logout-button">
         Logout
       </button>
-      <div class="footer-div"></div>
     </header>
+    <!-- MENU --> 
     <div class="page-container">
       <div class="menu-tabs">
         <h3 class="menu-header"></h3>
@@ -57,9 +57,9 @@
           <li id="special"></li>
         </ul>
       </div>
+      <!-- LOGIN BOX -->
       <div class="login-page-container">
         <div class="loginbox">
-          <!--           <img src="avatar.png" class="avatar" /> -->
           <div id="login-form-buttons">
             <button id="bartender" class="login-role-button">Bartender</button>
             <button id="vip-customer" class="login-role-button">
@@ -156,27 +156,15 @@
       <h2>- Dutchmans Pub -</h2>
       <t id="text-on-picture"></t>
     </div>
-    <!-- <div class="image-container">
-      <h1>– Dutchmans Pub –</h1>
-      <img src="./../db/images/Beer+Taps+Web.jpg" />
-    </div> -->
   </body>
-  <!--   <script src="./js/view/view_customerPage.js"></script>
- -->
   <script src="./js/customerPage.js"></script>
   <script src="./js/menuAPI.js"></script>
   <script src="./js/orderCartAPI.js"></script>
-  <script type="text/javascript" src="./../db/Beverages.js"></script>
   <script type="text/javascript" src="./../Management/db/DB.js"></script>
-  <script type="text/javascript" src="./../loginAPI.js"></script>
+  <script type="text/javascript" src="./../login-box/loginAPI.js.js"></script>
   <script
     type="text/javascript"
     src="./../Management/db/DB_SYSTEMBOLAGET.js"
   ></script>
   <script src="./../Management//db/DB_MIKES.js"></script>
-  <script type="text/javascript" src="./../db/Beverages_eng.js"></script>
-  <script type="text/javascript" src="./../db/orderDB.js"></script>
-  <script type="text/javascript" src="./../db/DBLoaded.js"></script>
-  <script type="text/javascript" src="./../db/loader.js"></script>
-  <script type="text/javascript" src="./../db/AvailableItemsDB.js"></script>
 </html>
