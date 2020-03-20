@@ -12,7 +12,6 @@ var currentlyRenderedType = "";
 
 $(function() {
   checkVIPStatus();
-
   db = DB_SYSTEMBOLAGET;
   console.log(db);
   console.log(DB_STOCK);
@@ -20,6 +19,8 @@ $(function() {
   setLanguage();
   $(".order-cart-container").hide(); // Hides the order-cart on load since it should be empty then
 });
+
+/** BUTTONS ON CUSTOMER PAGE CLICKS */
 /**
  * Language button is clicked
  */
@@ -31,6 +32,25 @@ $(".language-button").on("click", function(e) {
     upDatePrice(); // Updates the price to change language
     changeRenderedItems(currentlyRenderedType); // Updates the rendered items for the new language
   }
+});
+
+$("#customer-page-logout-button").on("click", function(e) {
+  e.preventDefault();
+  logOut(); // Calls the loginAPI
+  checkVIPStatus();
+  console.log("temp");
+});
+
+$("#open-login-button").click(function(e) {
+  e.preventDefault();
+  $(".login-page-container").show();
+  $("#open-login-button").hide();
+});
+
+$("#close-login-form").click(function(e) {
+  e.preventDefault();
+  $(".login-page-container").hide();
+  $("#open-login-button").show();
 });
 
 /**
@@ -80,36 +100,37 @@ function changeRenderedItems(type) {
   });
 }
 
-$("#customer-page-logout-button").on("click", function(e) {
+$("#order-button").click(function(e){
   e.preventDefault();
-  logOut(); // Calls the loginAPI
-  checkVIPStatus();
-  console.log("temp");
-});
-
-$("#open-login-button").click(function(e) {
-  e.preventDefault();
-  $(".login-page-container").show();
-  $("#open-login-button").hide();
-});
-
-$("#close-login-form").click(function(e) {
-  e.preventDefault();
-  $(".login-page-container").hide();
-  $("#open-login-button").show();
-});
+  orderButtonClicked(); // Calls function in orderCartAPI
+})
 
 function checkVIPStatus() {
+  console.log("Vip status");
   console.log(JSON.parse(localStorage.getItem("loggedUser")));
   var user = JSON.parse(localStorage.getItem("loggedUser")); // Gets the locally stored user
   if (user !== null) {
+    console.log("User !== null");
     $("#open-login-button").hide();
     if (user.vip === true) {
+      console.log("user.vip === true");
       // Checks in the user object if it's a VIP-customer
-      $("#special").show();
+      $("#special").show(); // Special drinks for VIP
+      $("#vip-customer-serv-form").show() // Special serving options for VIP
+      $("#add-to-credit").show() // Special payment option for VIP
+      $("#add-to-credit-label").show();
+    } else {
+      $(".beverages-list li#special").hide();
+      $("#vip-customer-serv-form").hide()
+      $("#add-to-credit").hide()
+      $("#add-to-credit-label").hide();
     }
-    $(".beverages-list li#special").hide();
   } else {
+    console.log("else");
+    $("#add-to-credit").hide()
+    $("#add-to-credit-label").hide();
+    $(".beverages-list li#special").hide();
+    $("#vip-customer-serv-form").hide()
     $("#customer-page-logout-button").hide();
   }
 }
@@ -129,24 +150,32 @@ function getDB() {
   return db;
 }
 
+
+
+
 // Sets the language of the page through string replacement
 
 function setLanguage() {
   switch (language) {
     case "english":
       // Customer page
+      $("#text-on-picture").text("A family owned pub since 1904");
+      $("#open-login-button").text("Press here to login");
+      $("#customer-page-logout-button").text("Logout");
+      // Menu
       $(".menu-header").text("Drink menu");
       $("#öl").text("Beer");
       $("#vin").text("Wine");
       $("#liquor").text("Liquor");
       $("#special").text("Special drinks");
       $("#other").text("Other spirits");
+      // Order cart
       $("#order-header").text("Items in cart");
       $("#order-button").text("Order");
       $("#price-box").text("Price: ");
-      $("#text-on-picture").text("A family owned pub since 1904");
-      $("#open-login-button").text("Press here to login");
-      $("#close-login-form").text("Close login form");
+      $("#add-to-credit-label").text("Add to credit");
+      $("#pay-in-app-label").text("Pay in app")
+      $("#pay-to-bartender-label").text("Pay to bartender");
       // Login form
       $("#vip-customer").text("VIP-customer");
       $("#uname").attr("placeholder", "Enter username");
@@ -156,21 +185,27 @@ function setLanguage() {
       $("#login-box-username").text("Username");
       $("#login-box-password").text("Password");
       $("#lost-password").text("Lost your password?");
+      $("#close-login-form").text("Close login form");
       break;
     case "swedish":
       // Customer Page
+      $("#text-on-picture").text("En familjeägd pub sedan 1904");
+      $("#open-login-button").text("Klicka här för att logga in");
+      $("#customer-page-logout-button").text("Logga ut");
+      // Menu
       $(".menu-header").text("Dryckesmeny");
       $("#öl").text("Öl");
       $("#vin").text("Vin");
       $("#liquor").text("Sprit");
       $("#special").text("Unika drinkar");
       $("#other").text("Övriga drycker");
+      // Order cart
       $("#order-header").text("Varor");
       $("#order-button").text("Beställ");
       $("#price-box").text("Pris: ");
-      $("#text-on-picture").text("En familjeägd pub sedan 1904");
-      $("#open-login-button").text("Klicka här för att logga in");
-      $("#close-login-form").text("Stäng ner");
+      $("#pay-in-app-label").text("Betala i app")
+      $("#pay-to-bartender-label").text("Betala till bartender");
+      $("#add-to-credit-label").text("Lägg till kredit");
       // Login Form
       $("#vip-customer").text("VIP-kund");
       $("#uname").attr("placeholder", "Skriv in användarnamn");
@@ -180,6 +215,7 @@ function setLanguage() {
       $("#login-box-username").text("Användarnamn");
       $("#login-box-password").text("Lösenord");
       $("#lost-password").text("Glömt lösenord?");
+      $("#close-login-form").text("Stäng ner");
       break;
   }
 }

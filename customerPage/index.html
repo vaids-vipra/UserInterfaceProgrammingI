@@ -89,6 +89,7 @@
           </button>
         </div>
       </div>
+      <!-- ORDER CART -->
       <div
         class="order-cart-container"
         ondragover="allowDrop(event)"
@@ -99,18 +100,26 @@
           <ul class="order-list"></ul>
         </div>
         <span id="price-box"></span>
-        <form id="payment-form">
+        <form id="payment-form" required>
           <input type="radio" name="payment" id="pay-in-app" value="in-app" />
-          <label for="pay-in-app">Pay in app</label>
+          <label id="pay-in-app-label" for="pay-in-app">Pay in app</label>
           <input
             type="radio"
             name="payment"
             id="pay-to-bartender"
             value="to-bartender"
           />
-          <label for="pay-to-bartender">Pay to bartender</label>
+          <label id="pay-to-bartender-label" for="pay-to-bartender">Pay to bartender</label>
+          <input type="radio" name="payment" id="add-to-credit" value="add-credit"/>
+          <label id="add-to-credit-label" for="add-to-credit">Add to credit</label>
         </form>
-        <button id="order-button" onclick="orderButtonClicked()">
+        <form id="vip-customer-serv-form">
+          <input type="radio" name="serving" id="pickup-bar" value="pickup-self" checked/>
+          <label for="pickup-bar">Pickup at bar</label>
+          <input type="radio" name="serving" id="served" value="served"/>
+          <label for="served">Get served</label>
+        </form>
+        <button id="order-button">
           Beställ
         </button>
       </div>
