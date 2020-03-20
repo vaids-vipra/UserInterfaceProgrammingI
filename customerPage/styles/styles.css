@@ -179,6 +179,16 @@ body {
   background-color: grey;
 }
 
+#payment-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+#payment-form div {
+  margin-top: 5px;
+}
+
 .plus-button {
   background: lightgreen;
   margin-left: 5px;

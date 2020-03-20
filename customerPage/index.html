@@ -5,7 +5,10 @@
     <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
     <link rel="stylesheet" type="text/css" href="./../style-loginpage.css" />
     <link rel="import" href="./../backend//index.html" />
-    <link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Oswald" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Oswald"
+      rel="stylesheet"
+    />
 
     <meta charset="utf-8" />
     <title>CustomerPage</title>
@@ -38,9 +41,10 @@
       <button class="login-logout-button" id="open-login-button">
         Open Login Form
       </button>
-      <button class="login-logout-button" id="customer-page-logout-button">Logout</button>
-      <div class="footer-div">
-      </div>
+      <button class="login-logout-button" id="customer-page-logout-button">
+        Logout
+      </button>
+      <div class="footer-div"></div>
     </header>
     <div class="page-container">
       <div class="menu-tabs">
@@ -58,11 +62,13 @@
           <!--           <img src="avatar.png" class="avatar" /> -->
           <div id="login-form-buttons">
             <button id="bartender" class="login-role-button">Bartender</button>
-            <button id="vip-customer" class="login-role-button">VIP-customer</button>
+            <button id="vip-customer" class="login-role-button">
+              VIP-customer
+            </button>
             <button id="manager" class="login-role-button">Manager</button>
           </div>
           <h1 id="login-box-header">Login Here</h1>
-          <form id="login-form" >
+          <form id="login-form">
             <p id="login-box-username">Username</p>
             <input
               type="text"
@@ -101,22 +107,43 @@
         </div>
         <span id="price-box"></span>
         <form id="payment-form" required>
-          <input type="radio" name="payment" id="pay-in-app" value="in-app" />
-          <label id="pay-in-app-label" for="pay-in-app">Pay in app</label>
-          <input
-            type="radio"
-            name="payment"
-            id="pay-to-bartender"
-            value="to-bartender"
-          />
-          <label id="pay-to-bartender-label" for="pay-to-bartender">Pay to bartender</label>
-          <input type="radio" name="payment" id="add-to-credit" value="add-credit"/>
-          <label id="add-to-credit-label" for="add-to-credit">Add to credit</label>
+          <div>
+            <input type="radio" name="payment" id="pay-in-app" value="in-app" />
+            <label id="pay-in-app-label" for="pay-in-app">Pay in app</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="payment"
+              id="pay-to-bartender"
+              value="to-bartender"
+            />
+            <label id="pay-to-bartender-label" for="pay-to-bartender"
+              >Pay to bartender</label
+            >
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="payment"
+              id="add-to-credit"
+              value="add-credit"
+            />
+            <label id="add-to-credit-label" for="add-to-credit"
+              >Add to credit</label
+            >
+          </div>
         </form>
         <form id="vip-customer-serv-form">
-          <input type="radio" name="serving" id="pickup-bar" value="pickup-self" checked/>
+          <input
+            type="radio"
+            name="serving"
+            id="pickup-bar"
+            value="pickup-self"
+            checked
+          />
           <label for="pickup-bar">Pickup at bar</label>
-          <input type="radio" name="serving" id="served" value="served"/>
+          <input type="radio" name="serving" id="served" value="served" />
           <label for="served">Get served</label>
         </form>
         <button id="order-button">
@@ -134,8 +161,9 @@
       <img src="./../db/images/Beer+Taps+Web.jpg" />
     </div> -->
   </body>
-<!--   <script src="./js/view/view_customerPage.js"></script>
- -->  <script src="./js/customerPage.js"></script>
+  <!--   <script src="./js/view/view_customerPage.js"></script>
+ -->
+  <script src="./js/customerPage.js"></script>
   <script src="./js/menuAPI.js"></script>
   <script src="./js/orderCartAPI.js"></script>
   <script type="text/javascript" src="./../db/Beverages.js"></script>
