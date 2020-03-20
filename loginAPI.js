@@ -94,18 +94,6 @@ $(".login-role-button").click(function(e) {
   }
 });
 
-$("#open-login-button").click(function(e) {
-  e.preventDefault();
-  $(".login-page-container").show();
-  $("#open-login-button").hide();
-});
-
-$("#close-login-form").click(function(e) {
-  e.preventDefault();
-  $(".login-page-container").hide();
-  $("#open-login-button").show();
-});
-
 function logOut() { 
     localStorage.clear();
     window.location.href = "/customerPage/index.html";

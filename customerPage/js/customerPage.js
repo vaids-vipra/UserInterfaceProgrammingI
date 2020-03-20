@@ -11,22 +11,14 @@ var currentlyRenderedType = "";
  */
 
 $(function() {
-    var user = JSON.parse(localStorage.getItem("loggedUser")); // Gets the locally stored user
-    if(user.vip !== undefined) { // Got weird errors without this
-      if(user.vip === true) { // Checks in the user object if it's a VIP-customer
-        $("#special").show();      
-      }
-    }
-    else {
-    $(".beverages-list li#special").hide();
-  }
-    db = DB_SYSTEMBOLAGET;
-    console.log(db);
-    console.log(DB_STOCK);
-    $(".login-page-container").hide(); // The container shouldn't be visible on load
-    setLanguage();
-    $(".order-cart-container").hide(); // Hides the order-cart on load since it should be empty then
+  checkVIPStatus();
 
+  db = DB_SYSTEMBOLAGET;
+  console.log(db);
+  console.log(DB_STOCK);
+  $(".login-page-container").hide(); // The container shouldn't be visible on load
+  setLanguage();
+  $(".order-cart-container").hide(); // Hides the order-cart on load since it should be empty then
 });
 /**
  * Language button is clicked
@@ -42,7 +34,7 @@ $(".language-button").on("click", function(e) {
 });
 
 /**
-* When a menu-"header" (i.e. beer) is clicked
+ * When a menu-"header" (i.e. beer) is clicked
  */
 $(".beverages-list li").on("click", function(e) {
   e.preventDefault();
@@ -86,6 +78,40 @@ function changeRenderedItems(type) {
       renderMoreInfoAboutItem(e.target.value);
     }
   });
+}
+
+$("#customer-page-logout-button").on("click", function(e) {
+  e.preventDefault();
+  logOut(); // Calls the loginAPI
+  checkVIPStatus();
+  console.log("temp");
+});
+
+$("#open-login-button").click(function(e) {
+  e.preventDefault();
+  $(".login-page-container").show();
+  $("#open-login-button").hide();
+});
+
+$("#close-login-form").click(function(e) {
+  e.preventDefault();
+  $(".login-page-container").hide();
+  $("#open-login-button").show();
+});
+
+function checkVIPStatus() {
+  console.log(JSON.parse(localStorage.getItem("loggedUser")));
+  var user = JSON.parse(localStorage.getItem("loggedUser")); // Gets the locally stored user
+  if (user !== null) {
+    $("#open-login-button").hide();
+    if (user.vip === true) {
+      // Checks in the user object if it's a VIP-customer
+      $("#special").show();
+    }
+    $(".beverages-list li#special").hide();
+  } else {
+    $("#customer-page-logout-button").hide();
+  }
 }
 
 // Helper function to access the global variable

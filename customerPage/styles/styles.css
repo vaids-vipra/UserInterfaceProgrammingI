@@ -27,14 +27,14 @@ body {
   height: 16px;
 }
 
-#open-login-button {
+.login-logout-button {
   background: #567973;
   font-size: 16px;
   border-radius: 17px;
   padding: 10px;
 }
 
-#open-login-button:hover {
+.login-logout-button:hover {
   background-color: #D6DDDC;
 }
 .page-container {
