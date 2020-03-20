@@ -28,7 +28,8 @@ body{
     /* top: 50%;
     right: 50%; */
     /* position: absolute; */
-    /* transform: translate(-50%,-50%); */
+    transform: translate(-50%,-50%);
+    top: 40%;
     box-sizing: border-box;
     padding: 70px 30px;
     align-self: center;
