@@ -31,7 +31,7 @@ function removeDuplicate() {
 }
 
 /**
- * This function creates a jquery object with a list of rendered items that we have in the temp (???) PubDB
+ * This function creates a jquery object with a list of rendered items that we have in the stock DB
  * It also appends this jquery object to the list which puts it in the DOM
  * @param {string} type type of item to render, i.e. beer or wine
  */
@@ -39,12 +39,8 @@ function removeDuplicate() {
 function renderItemsToScreen(type) {
   var beveragesToRender = [];
   $(".menuItem").remove(); // Removes all items from the menu since we want to render new
-  if (type === "liquor") {
-    // Currently all beverages with alc % > 30 are placed under liquor
-    beveragesToRender = findStrongBeveregesToShow(strongPercentage); // If liquor was clicked we find all strong bev first
-  } else {
-    beveragesToRender = findBeveragesToShow(type, getDB()); // Otherwise we just find all sprits that match our id (I.e. beer or wine atm)
-  }
+
+  beveragesToRender = findBeveragesToShow(type, getDB()); //Calls a function that finds the bevereges we should render
 
   var menuItems = $(); // Jquery object that we'll fill with spirits below
 
@@ -115,23 +111,6 @@ function getCurrentlyRenderedItems() {
 }
 
 /**
- * Will look through the Stock DB to find those beverages with alc > some limit
- * @param {int} percentage
- */
-
-function findStrongBeveregesToShow(percentage) {
-  var objectAlcoholPercentageName = "alkoholhalt";
-  var strongBeverages = [];
-  loadedDB = getDB(); // The Systembolaget DB
-  for (i = 0; i < loadedDB.length; i++) {
-    if (parseFloat(loadedDB[i][objectAlcoholPercentageName]) >= percentage) {
-      strongBeverages.push(loadedDB[i]);
-    }
-  }
-  return findBeveragesToShow("liquor", strongBeverages);
-}
-
-/**
  * This functions finds those items in the Systembolaget DB from our Stock DB to get additional info from it
  * @param {string} type Which type of bev to look for
  * @param {array} listOfSpirits The db to search in
@@ -142,11 +121,13 @@ function findBeveragesToShow(type, listOfSpirits) {
   var objectCategoryPropertyName = "varugrupp";
   var beveragesToShow = [];
   if (type === "liquor") {
+    console.log("liquior");
     for (i = 0; i < DB_STOCK.length; i++) {
       for (j = 0; j < listOfSpirits.length; j++) {
         if (
           DB_STOCK[i].article_id === listOfSpirits[j][objectIDPropertyName] &&
-          DB_STOCK[i].in_stock > 0
+          DB_STOCK[i].in_stock > 0 &&
+          DB_STOCK[i].alcohol_percentage > strongPercentage
         ) {
           var itemToPush = {
             // Creates an object with the info from DB_STOCK DB_STOXCK[i] and Systembolaget (listOfspirit[j]) that we need
